@@ -2,6 +2,7 @@
   "name": "@where-is-waldo/server",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "nx": {
     "targets": {
       "build": {
@@ -98,6 +99,14 @@
     }
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.56.0",
+    "dotenv": "^17.2.1",
     "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "prisma": "^6.14.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
   }
 }

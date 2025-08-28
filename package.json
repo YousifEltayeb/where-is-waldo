@@ -50,9 +50,17 @@
     "apps/*"
   ],
   "dependencies": {
+    "@prisma/client": "^6.14.0",
+    "@tailwindcss/vite": "^4.1.12",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "express": "^4.21.2",
+    "lucide-react": "^0.542.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-router-dom": "6.29.0"
+    "react-router-dom": "^6.29.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.12",
+    "tw-animate-css": "^1.3.7"
   }
 }

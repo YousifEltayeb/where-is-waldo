@@ -13,7 +13,11 @@
     ],
     "rootDir": "src",
     "module": "esnext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "exclude": [
     "out-tsc",
@@ -26,7 +30,7 @@
     "src/**/*.test.js",
     "src/**/*.spec.jsx",
     "src/**/*.test.jsx",
-    "vite.config.ts",
+    "vite.config.mts",
     "vite.config.mts",
     "vitest.config.ts",
     "vitest.config.mts",

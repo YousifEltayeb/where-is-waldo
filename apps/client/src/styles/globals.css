@@ -187,13 +187,29 @@
     0px 8px 10px -1px hsl(0 0% 0% / 0);
   --shadow-2xl: 0px 1px 0px 0px hsl(0 0% 0% / 0);
 }
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
-    letter-spacing: var(--tracking-normal);
+  }
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+  }
+  h3 {
+    font-size: var(--text-lg);
   }
 }
+/* @layer base { */
+/*   * { */
+/*     @apply border-border outline-ring/50; */
+/*   } */
+/*   body { */
+/*     @apply bg-background text-foreground; */
+/*     letter-spacing: var(--tracking-normal); */
+/*   } */
+/* } */

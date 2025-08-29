@@ -31,6 +31,10 @@ model Character {
     link   String @unique
     Game   Game?  @relation(fields: [gameId], references: [id])
     gameId Int?
+    xStart Int
+    xEnd   Int
+    yStart Int
+    yEnd   Int
 
     @@map("characters")
 }

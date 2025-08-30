@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Game {
+  id         Int         @id @default(autoincrement())
+  name       String      @unique
+  link       String      @unique
+  difficulty Difficulty  @default(EASY)
+  Characters Character[]
+  Rounds     Round[]
+
+  @@map("games")
+}
+
+model Character {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  link   String @unique
+  Game   Game?  @relation(fields: [gameId], references: [id])
+  gameId Int?
+  xStart Int
+  xEnd   Int
+  yStart Int
+  yEnd   Int
+
+  @@map("characters")
+}
+
+model Round {
+  id         String    @id @default(uuid())
+  start      DateTime  @default(now())
+  end        DateTime?
+  Game       Game      @relation(fields: [gameId], references: [id])
+  gameId     Int
+  hits       Int[]
+  playerName String?
+
+  @@map("rounds")
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}

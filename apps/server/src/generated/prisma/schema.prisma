@@ -15,12 +15,13 @@ datasource db {
 }
 
 model Game {
-  id         Int         @id @default(autoincrement())
-  name       String      @unique
-  link       String      @unique
-  difficulty Difficulty  @default(EASY)
-  Characters Character[]
-  Rounds     Round[]
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  link        String        @unique
+  difficulty  Difficulty    @default(EASY)
+  Characters  Character[]
+  Rounds      Round[]
+  Leaderboard Leaderboard[]
 
   @@map("games")
 }
@@ -40,15 +41,28 @@ model Character {
 }
 
 model Round {
-  id         String    @id @default(uuid())
-  start      DateTime  @default(now())
-  end        DateTime?
-  Game       Game      @relation(fields: [gameId], references: [id])
-  gameId     Int
-  hits       Int[]
-  playerName String?
+  id          String        @id @default(uuid())
+  start       DateTime      @default(now())
+  end         DateTime?
+  Game        Game          @relation(fields: [gameId], references: [id])
+  gameId      Int
+  hits        Int[]
+  playerName  String?
+  Leaderboard Leaderboard[]
 
   @@map("rounds")
+}
+
+model Leaderboard {
+  id         Int    @id @default(autoincrement())
+  Game       Game   @relation(fields: [gameId], references: [id])
+  seconds    Int
+  gameId     Int
+  playerName String
+  Round      Round  @relation(fields: [roundId], references: [id])
+  roundId    String
+
+  @@map("leaderboard")
 }
 
 enum Difficulty {

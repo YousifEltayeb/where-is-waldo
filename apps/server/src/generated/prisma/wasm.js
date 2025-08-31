@@ -147,6 +147,14 @@ exports.Prisma.RoundScalarFieldEnum = {
   playerName: 'playerName'
 };
 
+exports.Prisma.LeaderboardScalarFieldEnum = {
+  id: 'id',
+  seconds: 'seconds',
+  gameId: 'gameId',
+  playerName: 'playerName',
+  roundId: 'roundId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -170,7 +178,8 @@ exports.Difficulty = exports.$Enums.Difficulty = {
 exports.Prisma.ModelName = {
   Game: 'Game',
   Character: 'Character',
-  Round: 'Round'
+  Round: 'Round',
+  Leaderboard: 'Leaderboard'
 };
 
 /**

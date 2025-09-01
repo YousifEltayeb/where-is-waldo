@@ -1,10 +1,8 @@
 import { Router } from 'express';
-import {
-  createRoundMiddleware,
-  updateRound,
-} from '../controllers/roundsController';
+import { updateRoundMiddleware } from '../controllers/updateRoundController';
+import { createRoundMiddleware } from '../controllers/createRoundController';
 const rounds = Router();
 rounds.post('/rounds', createRoundMiddleware);
-rounds.patch('/rounds', updateRound);
+rounds.patch('/rounds', updateRoundMiddleware);
 
 export default rounds;

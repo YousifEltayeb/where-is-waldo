@@ -1149,13 +1149,11 @@ export namespace Prisma {
   export type GameCountOutputType = {
     Characters: number
     Rounds: number
-    Leaderboard: number
   }
 
   export type GameCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Characters?: boolean | GameCountOutputTypeCountCharactersArgs
     Rounds?: boolean | GameCountOutputTypeCountRoundsArgs
-    Leaderboard?: boolean | GameCountOutputTypeCountLeaderboardArgs
   }
 
   // Custom InputTypes
@@ -1181,44 +1179,6 @@ export namespace Prisma {
    */
   export type GameCountOutputTypeCountRoundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RoundWhereInput
-  }
-
-  /**
-   * GameCountOutputType without action
-   */
-  export type GameCountOutputTypeCountLeaderboardArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LeaderboardWhereInput
-  }
-
-
-  /**
-   * Count Type RoundCountOutputType
-   */
-
-  export type RoundCountOutputType = {
-    Leaderboard: number
-  }
-
-  export type RoundCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Leaderboard?: boolean | RoundCountOutputTypeCountLeaderboardArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * RoundCountOutputType without action
-   */
-  export type RoundCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RoundCountOutputType
-     */
-    select?: RoundCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * RoundCountOutputType without action
-   */
-  export type RoundCountOutputTypeCountLeaderboardArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: LeaderboardWhereInput
   }
 
 
@@ -1418,7 +1378,6 @@ export namespace Prisma {
     difficulty?: boolean
     Characters?: boolean | Game$CharactersArgs<ExtArgs>
     Rounds?: boolean | Game$RoundsArgs<ExtArgs>
-    Leaderboard?: boolean | Game$LeaderboardArgs<ExtArgs>
     _count?: boolean | GameCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["game"]>
 
@@ -1447,7 +1406,6 @@ export namespace Prisma {
   export type GameInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Characters?: boolean | Game$CharactersArgs<ExtArgs>
     Rounds?: boolean | Game$RoundsArgs<ExtArgs>
-    Leaderboard?: boolean | Game$LeaderboardArgs<ExtArgs>
     _count?: boolean | GameCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type GameIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1458,7 +1416,6 @@ export namespace Prisma {
     objects: {
       Characters: Prisma.$CharacterPayload<ExtArgs>[]
       Rounds: Prisma.$RoundPayload<ExtArgs>[]
-      Leaderboard: Prisma.$LeaderboardPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -1861,7 +1818,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Characters<T extends Game$CharactersArgs<ExtArgs> = {}>(args?: Subset<T, Game$CharactersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Rounds<T extends Game$RoundsArgs<ExtArgs> = {}>(args?: Subset<T, Game$RoundsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Leaderboard<T extends Game$LeaderboardArgs<ExtArgs> = {}>(args?: Subset<T, Game$LeaderboardArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeaderboardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2328,30 +2284,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RoundScalarFieldEnum | RoundScalarFieldEnum[]
-  }
-
-  /**
-   * Game.Leaderboard
-   */
-  export type Game$LeaderboardArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Leaderboard
-     */
-    select?: LeaderboardSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Leaderboard
-     */
-    omit?: LeaderboardOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: LeaderboardInclude<ExtArgs> | null
-    where?: LeaderboardWhereInput
-    orderBy?: LeaderboardOrderByWithRelationInput | LeaderboardOrderByWithRelationInput[]
-    cursor?: LeaderboardWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: LeaderboardScalarFieldEnum | LeaderboardScalarFieldEnum[]
   }
 
   /**
@@ -3570,7 +3502,6 @@ export namespace Prisma {
     start: Date | null
     end: Date | null
     gameId: number | null
-    playerName: string | null
   }
 
   export type RoundMaxAggregateOutputType = {
@@ -3578,7 +3509,6 @@ export namespace Prisma {
     start: Date | null
     end: Date | null
     gameId: number | null
-    playerName: string | null
   }
 
   export type RoundCountAggregateOutputType = {
@@ -3587,7 +3517,6 @@ export namespace Prisma {
     end: number
     gameId: number
     hits: number
-    playerName: number
     _all: number
   }
 
@@ -3607,7 +3536,6 @@ export namespace Prisma {
     start?: true
     end?: true
     gameId?: true
-    playerName?: true
   }
 
   export type RoundMaxAggregateInputType = {
@@ -3615,7 +3543,6 @@ export namespace Prisma {
     start?: true
     end?: true
     gameId?: true
-    playerName?: true
   }
 
   export type RoundCountAggregateInputType = {
@@ -3624,7 +3551,6 @@ export namespace Prisma {
     end?: true
     gameId?: true
     hits?: true
-    playerName?: true
     _all?: true
   }
 
@@ -3720,7 +3646,6 @@ export namespace Prisma {
     end: Date | null
     gameId: number
     hits: number[]
-    playerName: string | null
     _count: RoundCountAggregateOutputType | null
     _avg: RoundAvgAggregateOutputType | null
     _sum: RoundSumAggregateOutputType | null
@@ -3748,10 +3673,8 @@ export namespace Prisma {
     end?: boolean
     gameId?: boolean
     hits?: boolean
-    playerName?: boolean
     Game?: boolean | GameDefaultArgs<ExtArgs>
     Leaderboard?: boolean | Round$LeaderboardArgs<ExtArgs>
-    _count?: boolean | RoundCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["round"]>
 
   export type RoundSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3760,7 +3683,6 @@ export namespace Prisma {
     end?: boolean
     gameId?: boolean
     hits?: boolean
-    playerName?: boolean
     Game?: boolean | GameDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["round"]>
 
@@ -3770,7 +3692,6 @@ export namespace Prisma {
     end?: boolean
     gameId?: boolean
     hits?: boolean
-    playerName?: boolean
     Game?: boolean | GameDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["round"]>
 
@@ -3780,14 +3701,12 @@ export namespace Prisma {
     end?: boolean
     gameId?: boolean
     hits?: boolean
-    playerName?: boolean
   }
 
-  export type RoundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "start" | "end" | "gameId" | "hits" | "playerName", ExtArgs["result"]["round"]>
+  export type RoundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "start" | "end" | "gameId" | "hits", ExtArgs["result"]["round"]>
   export type RoundInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Game?: boolean | GameDefaultArgs<ExtArgs>
     Leaderboard?: boolean | Round$LeaderboardArgs<ExtArgs>
-    _count?: boolean | RoundCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RoundIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Game?: boolean | GameDefaultArgs<ExtArgs>
@@ -3800,7 +3719,7 @@ export namespace Prisma {
     name: "Round"
     objects: {
       Game: Prisma.$GamePayload<ExtArgs>
-      Leaderboard: Prisma.$LeaderboardPayload<ExtArgs>[]
+      Leaderboard: Prisma.$LeaderboardPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3808,7 +3727,6 @@ export namespace Prisma {
       end: Date | null
       gameId: number
       hits: number[]
-      playerName: string | null
     }, ExtArgs["result"]["round"]>
     composites: {}
   }
@@ -4204,7 +4122,7 @@ export namespace Prisma {
   export interface Prisma__RoundClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Game<T extends GameDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GameDefaultArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Leaderboard<T extends Round$LeaderboardArgs<ExtArgs> = {}>(args?: Subset<T, Round$LeaderboardArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeaderboardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Leaderboard<T extends Round$LeaderboardArgs<ExtArgs> = {}>(args?: Subset<T, Round$LeaderboardArgs<ExtArgs>>): Prisma__LeaderboardClient<$Result.GetResult<Prisma.$LeaderboardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4239,7 +4157,6 @@ export namespace Prisma {
     readonly end: FieldRef<"Round", 'DateTime'>
     readonly gameId: FieldRef<"Round", 'Int'>
     readonly hits: FieldRef<"Round", 'Int[]'>
-    readonly playerName: FieldRef<"Round", 'String'>
   }
     
 
@@ -4652,11 +4569,6 @@ export namespace Prisma {
      */
     include?: LeaderboardInclude<ExtArgs> | null
     where?: LeaderboardWhereInput
-    orderBy?: LeaderboardOrderByWithRelationInput | LeaderboardOrderByWithRelationInput[]
-    cursor?: LeaderboardWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: LeaderboardScalarFieldEnum | LeaderboardScalarFieldEnum[]
   }
 
   /**
@@ -4693,19 +4605,16 @@ export namespace Prisma {
   export type LeaderboardAvgAggregateOutputType = {
     id: number | null
     seconds: number | null
-    gameId: number | null
   }
 
   export type LeaderboardSumAggregateOutputType = {
     id: number | null
     seconds: number | null
-    gameId: number | null
   }
 
   export type LeaderboardMinAggregateOutputType = {
     id: number | null
     seconds: number | null
-    gameId: number | null
     playerName: string | null
     roundId: string | null
   }
@@ -4713,7 +4622,6 @@ export namespace Prisma {
   export type LeaderboardMaxAggregateOutputType = {
     id: number | null
     seconds: number | null
-    gameId: number | null
     playerName: string | null
     roundId: string | null
   }
@@ -4721,7 +4629,6 @@ export namespace Prisma {
   export type LeaderboardCountAggregateOutputType = {
     id: number
     seconds: number
-    gameId: number
     playerName: number
     roundId: number
     _all: number
@@ -4731,19 +4638,16 @@ export namespace Prisma {
   export type LeaderboardAvgAggregateInputType = {
     id?: true
     seconds?: true
-    gameId?: true
   }
 
   export type LeaderboardSumAggregateInputType = {
     id?: true
     seconds?: true
-    gameId?: true
   }
 
   export type LeaderboardMinAggregateInputType = {
     id?: true
     seconds?: true
-    gameId?: true
     playerName?: true
     roundId?: true
   }
@@ -4751,7 +4655,6 @@ export namespace Prisma {
   export type LeaderboardMaxAggregateInputType = {
     id?: true
     seconds?: true
-    gameId?: true
     playerName?: true
     roundId?: true
   }
@@ -4759,7 +4662,6 @@ export namespace Prisma {
   export type LeaderboardCountAggregateInputType = {
     id?: true
     seconds?: true
-    gameId?: true
     playerName?: true
     roundId?: true
     _all?: true
@@ -4854,8 +4756,7 @@ export namespace Prisma {
   export type LeaderboardGroupByOutputType = {
     id: number
     seconds: number
-    gameId: number
-    playerName: string
+    playerName: string | null
     roundId: string
     _count: LeaderboardCountAggregateOutputType | null
     _avg: LeaderboardAvgAggregateOutputType | null
@@ -4881,66 +4782,54 @@ export namespace Prisma {
   export type LeaderboardSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     seconds?: boolean
-    gameId?: boolean
     playerName?: boolean
     roundId?: boolean
-    Game?: boolean | GameDefaultArgs<ExtArgs>
     Round?: boolean | RoundDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["leaderboard"]>
 
   export type LeaderboardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     seconds?: boolean
-    gameId?: boolean
     playerName?: boolean
     roundId?: boolean
-    Game?: boolean | GameDefaultArgs<ExtArgs>
     Round?: boolean | RoundDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["leaderboard"]>
 
   export type LeaderboardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     seconds?: boolean
-    gameId?: boolean
     playerName?: boolean
     roundId?: boolean
-    Game?: boolean | GameDefaultArgs<ExtArgs>
     Round?: boolean | RoundDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["leaderboard"]>
 
   export type LeaderboardSelectScalar = {
     id?: boolean
     seconds?: boolean
-    gameId?: boolean
     playerName?: boolean
     roundId?: boolean
   }
 
-  export type LeaderboardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "seconds" | "gameId" | "playerName" | "roundId", ExtArgs["result"]["leaderboard"]>
+  export type LeaderboardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "seconds" | "playerName" | "roundId", ExtArgs["result"]["leaderboard"]>
   export type LeaderboardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Game?: boolean | GameDefaultArgs<ExtArgs>
     Round?: boolean | RoundDefaultArgs<ExtArgs>
   }
   export type LeaderboardIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Game?: boolean | GameDefaultArgs<ExtArgs>
     Round?: boolean | RoundDefaultArgs<ExtArgs>
   }
   export type LeaderboardIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Game?: boolean | GameDefaultArgs<ExtArgs>
     Round?: boolean | RoundDefaultArgs<ExtArgs>
   }
 
   export type $LeaderboardPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Leaderboard"
     objects: {
-      Game: Prisma.$GamePayload<ExtArgs>
       Round: Prisma.$RoundPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       seconds: number
-      gameId: number
-      playerName: string
+      playerName: string | null
       roundId: string
     }, ExtArgs["result"]["leaderboard"]>
     composites: {}
@@ -5336,7 +5225,6 @@ export namespace Prisma {
    */
   export interface Prisma__LeaderboardClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Game<T extends GameDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GameDefaultArgs<ExtArgs>>): Prisma__GameClient<$Result.GetResult<Prisma.$GamePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Round<T extends RoundDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoundDefaultArgs<ExtArgs>>): Prisma__RoundClient<$Result.GetResult<Prisma.$RoundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5369,7 +5257,6 @@ export namespace Prisma {
   interface LeaderboardFieldRefs {
     readonly id: FieldRef<"Leaderboard", 'Int'>
     readonly seconds: FieldRef<"Leaderboard", 'Int'>
-    readonly gameId: FieldRef<"Leaderboard", 'Int'>
     readonly playerName: FieldRef<"Leaderboard", 'String'>
     readonly roundId: FieldRef<"Leaderboard", 'String'>
   }
@@ -5829,8 +5716,7 @@ export namespace Prisma {
     start: 'start',
     end: 'end',
     gameId: 'gameId',
-    hits: 'hits',
-    playerName: 'playerName'
+    hits: 'hits'
   };
 
   export type RoundScalarFieldEnum = (typeof RoundScalarFieldEnum)[keyof typeof RoundScalarFieldEnum]
@@ -5839,7 +5725,6 @@ export namespace Prisma {
   export const LeaderboardScalarFieldEnum: {
     id: 'id',
     seconds: 'seconds',
-    gameId: 'gameId',
     playerName: 'playerName',
     roundId: 'roundId'
   };
@@ -5959,7 +5844,6 @@ export namespace Prisma {
     difficulty?: EnumDifficultyFilter<"Game"> | $Enums.Difficulty
     Characters?: CharacterListRelationFilter
     Rounds?: RoundListRelationFilter
-    Leaderboard?: LeaderboardListRelationFilter
   }
 
   export type GameOrderByWithRelationInput = {
@@ -5969,7 +5853,6 @@ export namespace Prisma {
     difficulty?: SortOrder
     Characters?: CharacterOrderByRelationAggregateInput
     Rounds?: RoundOrderByRelationAggregateInput
-    Leaderboard?: LeaderboardOrderByRelationAggregateInput
   }
 
   export type GameWhereUniqueInput = Prisma.AtLeast<{
@@ -5982,7 +5865,6 @@ export namespace Prisma {
     difficulty?: EnumDifficultyFilter<"Game"> | $Enums.Difficulty
     Characters?: CharacterListRelationFilter
     Rounds?: RoundListRelationFilter
-    Leaderboard?: LeaderboardListRelationFilter
   }, "id" | "name" | "link">
 
   export type GameOrderByWithAggregationInput = {
@@ -6088,9 +5970,8 @@ export namespace Prisma {
     end?: DateTimeNullableFilter<"Round"> | Date | string | null
     gameId?: IntFilter<"Round"> | number
     hits?: IntNullableListFilter<"Round">
-    playerName?: StringNullableFilter<"Round"> | string | null
     Game?: XOR<GameScalarRelationFilter, GameWhereInput>
-    Leaderboard?: LeaderboardListRelationFilter
+    Leaderboard?: XOR<LeaderboardNullableScalarRelationFilter, LeaderboardWhereInput> | null
   }
 
   export type RoundOrderByWithRelationInput = {
@@ -6099,9 +5980,8 @@ export namespace Prisma {
     end?: SortOrderInput | SortOrder
     gameId?: SortOrder
     hits?: SortOrder
-    playerName?: SortOrderInput | SortOrder
     Game?: GameOrderByWithRelationInput
-    Leaderboard?: LeaderboardOrderByRelationAggregateInput
+    Leaderboard?: LeaderboardOrderByWithRelationInput
   }
 
   export type RoundWhereUniqueInput = Prisma.AtLeast<{
@@ -6113,9 +5993,8 @@ export namespace Prisma {
     end?: DateTimeNullableFilter<"Round"> | Date | string | null
     gameId?: IntFilter<"Round"> | number
     hits?: IntNullableListFilter<"Round">
-    playerName?: StringNullableFilter<"Round"> | string | null
     Game?: XOR<GameScalarRelationFilter, GameWhereInput>
-    Leaderboard?: LeaderboardListRelationFilter
+    Leaderboard?: XOR<LeaderboardNullableScalarRelationFilter, LeaderboardWhereInput> | null
   }, "id">
 
   export type RoundOrderByWithAggregationInput = {
@@ -6124,7 +6003,6 @@ export namespace Prisma {
     end?: SortOrderInput | SortOrder
     gameId?: SortOrder
     hits?: SortOrder
-    playerName?: SortOrderInput | SortOrder
     _count?: RoundCountOrderByAggregateInput
     _avg?: RoundAvgOrderByAggregateInput
     _max?: RoundMaxOrderByAggregateInput
@@ -6141,7 +6019,6 @@ export namespace Prisma {
     end?: DateTimeNullableWithAggregatesFilter<"Round"> | Date | string | null
     gameId?: IntWithAggregatesFilter<"Round"> | number
     hits?: IntNullableListFilter<"Round">
-    playerName?: StringNullableWithAggregatesFilter<"Round"> | string | null
   }
 
   export type LeaderboardWhereInput = {
@@ -6150,41 +6027,34 @@ export namespace Prisma {
     NOT?: LeaderboardWhereInput | LeaderboardWhereInput[]
     id?: IntFilter<"Leaderboard"> | number
     seconds?: IntFilter<"Leaderboard"> | number
-    gameId?: IntFilter<"Leaderboard"> | number
-    playerName?: StringFilter<"Leaderboard"> | string
+    playerName?: StringNullableFilter<"Leaderboard"> | string | null
     roundId?: StringFilter<"Leaderboard"> | string
-    Game?: XOR<GameScalarRelationFilter, GameWhereInput>
     Round?: XOR<RoundScalarRelationFilter, RoundWhereInput>
   }
 
   export type LeaderboardOrderByWithRelationInput = {
     id?: SortOrder
     seconds?: SortOrder
-    gameId?: SortOrder
-    playerName?: SortOrder
+    playerName?: SortOrderInput | SortOrder
     roundId?: SortOrder
-    Game?: GameOrderByWithRelationInput
     Round?: RoundOrderByWithRelationInput
   }
 
   export type LeaderboardWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    roundId?: string
     AND?: LeaderboardWhereInput | LeaderboardWhereInput[]
     OR?: LeaderboardWhereInput[]
     NOT?: LeaderboardWhereInput | LeaderboardWhereInput[]
     seconds?: IntFilter<"Leaderboard"> | number
-    gameId?: IntFilter<"Leaderboard"> | number
-    playerName?: StringFilter<"Leaderboard"> | string
-    roundId?: StringFilter<"Leaderboard"> | string
-    Game?: XOR<GameScalarRelationFilter, GameWhereInput>
+    playerName?: StringNullableFilter<"Leaderboard"> | string | null
     Round?: XOR<RoundScalarRelationFilter, RoundWhereInput>
-  }, "id">
+  }, "id" | "roundId">
 
   export type LeaderboardOrderByWithAggregationInput = {
     id?: SortOrder
     seconds?: SortOrder
-    gameId?: SortOrder
-    playerName?: SortOrder
+    playerName?: SortOrderInput | SortOrder
     roundId?: SortOrder
     _count?: LeaderboardCountOrderByAggregateInput
     _avg?: LeaderboardAvgOrderByAggregateInput
@@ -6199,8 +6069,7 @@ export namespace Prisma {
     NOT?: LeaderboardScalarWhereWithAggregatesInput | LeaderboardScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Leaderboard"> | number
     seconds?: IntWithAggregatesFilter<"Leaderboard"> | number
-    gameId?: IntWithAggregatesFilter<"Leaderboard"> | number
-    playerName?: StringWithAggregatesFilter<"Leaderboard"> | string
+    playerName?: StringNullableWithAggregatesFilter<"Leaderboard"> | string | null
     roundId?: StringWithAggregatesFilter<"Leaderboard"> | string
   }
 
@@ -6210,7 +6079,6 @@ export namespace Prisma {
     difficulty?: $Enums.Difficulty
     Characters?: CharacterCreateNestedManyWithoutGameInput
     Rounds?: RoundCreateNestedManyWithoutGameInput
-    Leaderboard?: LeaderboardCreateNestedManyWithoutGameInput
   }
 
   export type GameUncheckedCreateInput = {
@@ -6220,7 +6088,6 @@ export namespace Prisma {
     difficulty?: $Enums.Difficulty
     Characters?: CharacterUncheckedCreateNestedManyWithoutGameInput
     Rounds?: RoundUncheckedCreateNestedManyWithoutGameInput
-    Leaderboard?: LeaderboardUncheckedCreateNestedManyWithoutGameInput
   }
 
   export type GameUpdateInput = {
@@ -6229,7 +6096,6 @@ export namespace Prisma {
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     Characters?: CharacterUpdateManyWithoutGameNestedInput
     Rounds?: RoundUpdateManyWithoutGameNestedInput
-    Leaderboard?: LeaderboardUpdateManyWithoutGameNestedInput
   }
 
   export type GameUncheckedUpdateInput = {
@@ -6239,7 +6105,6 @@ export namespace Prisma {
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     Characters?: CharacterUncheckedUpdateManyWithoutGameNestedInput
     Rounds?: RoundUncheckedUpdateManyWithoutGameNestedInput
-    Leaderboard?: LeaderboardUncheckedUpdateManyWithoutGameNestedInput
   }
 
   export type GameCreateManyInput = {
@@ -6340,9 +6205,8 @@ export namespace Prisma {
     start?: Date | string
     end?: Date | string | null
     hits?: RoundCreatehitsInput | number[]
-    playerName?: string | null
     Game: GameCreateNestedOneWithoutRoundsInput
-    Leaderboard?: LeaderboardCreateNestedManyWithoutRoundInput
+    Leaderboard?: LeaderboardCreateNestedOneWithoutRoundInput
   }
 
   export type RoundUncheckedCreateInput = {
@@ -6351,8 +6215,7 @@ export namespace Prisma {
     end?: Date | string | null
     gameId: number
     hits?: RoundCreatehitsInput | number[]
-    playerName?: string | null
-    Leaderboard?: LeaderboardUncheckedCreateNestedManyWithoutRoundInput
+    Leaderboard?: LeaderboardUncheckedCreateNestedOneWithoutRoundInput
   }
 
   export type RoundUpdateInput = {
@@ -6360,9 +6223,8 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     hits?: RoundUpdatehitsInput | number[]
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
     Game?: GameUpdateOneRequiredWithoutRoundsNestedInput
-    Leaderboard?: LeaderboardUpdateManyWithoutRoundNestedInput
+    Leaderboard?: LeaderboardUpdateOneWithoutRoundNestedInput
   }
 
   export type RoundUncheckedUpdateInput = {
@@ -6371,8 +6233,7 @@ export namespace Prisma {
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gameId?: IntFieldUpdateOperationsInput | number
     hits?: RoundUpdatehitsInput | number[]
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
-    Leaderboard?: LeaderboardUncheckedUpdateManyWithoutRoundNestedInput
+    Leaderboard?: LeaderboardUncheckedUpdateOneWithoutRoundNestedInput
   }
 
   export type RoundCreateManyInput = {
@@ -6381,7 +6242,6 @@ export namespace Prisma {
     end?: Date | string | null
     gameId: number
     hits?: RoundCreatehitsInput | number[]
-    playerName?: string | null
   }
 
   export type RoundUpdateManyMutationInput = {
@@ -6389,7 +6249,6 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     hits?: RoundUpdatehitsInput | number[]
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RoundUncheckedUpdateManyInput = {
@@ -6398,57 +6257,50 @@ export namespace Prisma {
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gameId?: IntFieldUpdateOperationsInput | number
     hits?: RoundUpdatehitsInput | number[]
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LeaderboardCreateInput = {
     seconds: number
-    playerName: string
-    Game: GameCreateNestedOneWithoutLeaderboardInput
+    playerName?: string | null
     Round: RoundCreateNestedOneWithoutLeaderboardInput
   }
 
   export type LeaderboardUncheckedCreateInput = {
     id?: number
     seconds: number
-    gameId: number
-    playerName: string
+    playerName?: string | null
     roundId: string
   }
 
   export type LeaderboardUpdateInput = {
     seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: StringFieldUpdateOperationsInput | string
-    Game?: GameUpdateOneRequiredWithoutLeaderboardNestedInput
+    playerName?: NullableStringFieldUpdateOperationsInput | string | null
     Round?: RoundUpdateOneRequiredWithoutLeaderboardNestedInput
   }
 
   export type LeaderboardUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     seconds?: IntFieldUpdateOperationsInput | number
-    gameId?: IntFieldUpdateOperationsInput | number
-    playerName?: StringFieldUpdateOperationsInput | string
+    playerName?: NullableStringFieldUpdateOperationsInput | string | null
     roundId?: StringFieldUpdateOperationsInput | string
   }
 
   export type LeaderboardCreateManyInput = {
     id?: number
     seconds: number
-    gameId: number
-    playerName: string
+    playerName?: string | null
     roundId: string
   }
 
   export type LeaderboardUpdateManyMutationInput = {
     seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: StringFieldUpdateOperationsInput | string
+    playerName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LeaderboardUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     seconds?: IntFieldUpdateOperationsInput | number
-    gameId?: IntFieldUpdateOperationsInput | number
-    playerName?: StringFieldUpdateOperationsInput | string
+    playerName?: NullableStringFieldUpdateOperationsInput | string | null
     roundId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -6497,21 +6349,11 @@ export namespace Prisma {
     none?: RoundWhereInput
   }
 
-  export type LeaderboardListRelationFilter = {
-    every?: LeaderboardWhereInput
-    some?: LeaderboardWhereInput
-    none?: LeaderboardWhereInput
-  }
-
   export type CharacterOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type RoundOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type LeaderboardOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6706,24 +6548,14 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type GameScalarRelationFilter = {
     is?: GameWhereInput
     isNot?: GameWhereInput
+  }
+
+  export type LeaderboardNullableScalarRelationFilter = {
+    is?: LeaderboardWhereInput | null
+    isNot?: LeaderboardWhereInput | null
   }
 
   export type RoundCountOrderByAggregateInput = {
@@ -6732,7 +6564,6 @@ export namespace Prisma {
     end?: SortOrder
     gameId?: SortOrder
     hits?: SortOrder
-    playerName?: SortOrder
   }
 
   export type RoundAvgOrderByAggregateInput = {
@@ -6745,7 +6576,6 @@ export namespace Prisma {
     start?: SortOrder
     end?: SortOrder
     gameId?: SortOrder
-    playerName?: SortOrder
   }
 
   export type RoundMinOrderByAggregateInput = {
@@ -6753,7 +6583,6 @@ export namespace Prisma {
     start?: SortOrder
     end?: SortOrder
     gameId?: SortOrder
-    playerName?: SortOrder
   }
 
   export type RoundSumOrderByAggregateInput = {
@@ -6789,6 +6618,57 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type RoundScalarRelationFilter = {
+    is?: RoundWhereInput
+    isNot?: RoundWhereInput
+  }
+
+  export type LeaderboardCountOrderByAggregateInput = {
+    id?: SortOrder
+    seconds?: SortOrder
+    playerName?: SortOrder
+    roundId?: SortOrder
+  }
+
+  export type LeaderboardAvgOrderByAggregateInput = {
+    id?: SortOrder
+    seconds?: SortOrder
+  }
+
+  export type LeaderboardMaxOrderByAggregateInput = {
+    id?: SortOrder
+    seconds?: SortOrder
+    playerName?: SortOrder
+    roundId?: SortOrder
+  }
+
+  export type LeaderboardMinOrderByAggregateInput = {
+    id?: SortOrder
+    seconds?: SortOrder
+    playerName?: SortOrder
+    roundId?: SortOrder
+  }
+
+  export type LeaderboardSumOrderByAggregateInput = {
+    id?: SortOrder
+    seconds?: SortOrder
+  }
+
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -6807,47 +6687,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type RoundScalarRelationFilter = {
-    is?: RoundWhereInput
-    isNot?: RoundWhereInput
-  }
-
-  export type LeaderboardCountOrderByAggregateInput = {
-    id?: SortOrder
-    seconds?: SortOrder
-    gameId?: SortOrder
-    playerName?: SortOrder
-    roundId?: SortOrder
-  }
-
-  export type LeaderboardAvgOrderByAggregateInput = {
-    id?: SortOrder
-    seconds?: SortOrder
-    gameId?: SortOrder
-  }
-
-  export type LeaderboardMaxOrderByAggregateInput = {
-    id?: SortOrder
-    seconds?: SortOrder
-    gameId?: SortOrder
-    playerName?: SortOrder
-    roundId?: SortOrder
-  }
-
-  export type LeaderboardMinOrderByAggregateInput = {
-    id?: SortOrder
-    seconds?: SortOrder
-    gameId?: SortOrder
-    playerName?: SortOrder
-    roundId?: SortOrder
-  }
-
-  export type LeaderboardSumOrderByAggregateInput = {
-    id?: SortOrder
-    seconds?: SortOrder
-    gameId?: SortOrder
-  }
-
   export type CharacterCreateNestedManyWithoutGameInput = {
     create?: XOR<CharacterCreateWithoutGameInput, CharacterUncheckedCreateWithoutGameInput> | CharacterCreateWithoutGameInput[] | CharacterUncheckedCreateWithoutGameInput[]
     connectOrCreate?: CharacterCreateOrConnectWithoutGameInput | CharacterCreateOrConnectWithoutGameInput[]
@@ -6862,13 +6701,6 @@ export namespace Prisma {
     connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
   }
 
-  export type LeaderboardCreateNestedManyWithoutGameInput = {
-    create?: XOR<LeaderboardCreateWithoutGameInput, LeaderboardUncheckedCreateWithoutGameInput> | LeaderboardCreateWithoutGameInput[] | LeaderboardUncheckedCreateWithoutGameInput[]
-    connectOrCreate?: LeaderboardCreateOrConnectWithoutGameInput | LeaderboardCreateOrConnectWithoutGameInput[]
-    createMany?: LeaderboardCreateManyGameInputEnvelope
-    connect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-  }
-
   export type CharacterUncheckedCreateNestedManyWithoutGameInput = {
     create?: XOR<CharacterCreateWithoutGameInput, CharacterUncheckedCreateWithoutGameInput> | CharacterCreateWithoutGameInput[] | CharacterUncheckedCreateWithoutGameInput[]
     connectOrCreate?: CharacterCreateOrConnectWithoutGameInput | CharacterCreateOrConnectWithoutGameInput[]
@@ -6881,13 +6713,6 @@ export namespace Prisma {
     connectOrCreate?: RoundCreateOrConnectWithoutGameInput | RoundCreateOrConnectWithoutGameInput[]
     createMany?: RoundCreateManyGameInputEnvelope
     connect?: RoundWhereUniqueInput | RoundWhereUniqueInput[]
-  }
-
-  export type LeaderboardUncheckedCreateNestedManyWithoutGameInput = {
-    create?: XOR<LeaderboardCreateWithoutGameInput, LeaderboardUncheckedCreateWithoutGameInput> | LeaderboardCreateWithoutGameInput[] | LeaderboardUncheckedCreateWithoutGameInput[]
-    connectOrCreate?: LeaderboardCreateOrConnectWithoutGameInput | LeaderboardCreateOrConnectWithoutGameInput[]
-    createMany?: LeaderboardCreateManyGameInputEnvelope
-    connect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6926,20 +6751,6 @@ export namespace Prisma {
     deleteMany?: RoundScalarWhereInput | RoundScalarWhereInput[]
   }
 
-  export type LeaderboardUpdateManyWithoutGameNestedInput = {
-    create?: XOR<LeaderboardCreateWithoutGameInput, LeaderboardUncheckedCreateWithoutGameInput> | LeaderboardCreateWithoutGameInput[] | LeaderboardUncheckedCreateWithoutGameInput[]
-    connectOrCreate?: LeaderboardCreateOrConnectWithoutGameInput | LeaderboardCreateOrConnectWithoutGameInput[]
-    upsert?: LeaderboardUpsertWithWhereUniqueWithoutGameInput | LeaderboardUpsertWithWhereUniqueWithoutGameInput[]
-    createMany?: LeaderboardCreateManyGameInputEnvelope
-    set?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    disconnect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    delete?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    connect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    update?: LeaderboardUpdateWithWhereUniqueWithoutGameInput | LeaderboardUpdateWithWhereUniqueWithoutGameInput[]
-    updateMany?: LeaderboardUpdateManyWithWhereWithoutGameInput | LeaderboardUpdateManyWithWhereWithoutGameInput[]
-    deleteMany?: LeaderboardScalarWhereInput | LeaderboardScalarWhereInput[]
-  }
-
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -6976,20 +6787,6 @@ export namespace Prisma {
     deleteMany?: RoundScalarWhereInput | RoundScalarWhereInput[]
   }
 
-  export type LeaderboardUncheckedUpdateManyWithoutGameNestedInput = {
-    create?: XOR<LeaderboardCreateWithoutGameInput, LeaderboardUncheckedCreateWithoutGameInput> | LeaderboardCreateWithoutGameInput[] | LeaderboardUncheckedCreateWithoutGameInput[]
-    connectOrCreate?: LeaderboardCreateOrConnectWithoutGameInput | LeaderboardCreateOrConnectWithoutGameInput[]
-    upsert?: LeaderboardUpsertWithWhereUniqueWithoutGameInput | LeaderboardUpsertWithWhereUniqueWithoutGameInput[]
-    createMany?: LeaderboardCreateManyGameInputEnvelope
-    set?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    disconnect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    delete?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    connect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    update?: LeaderboardUpdateWithWhereUniqueWithoutGameInput | LeaderboardUpdateWithWhereUniqueWithoutGameInput[]
-    updateMany?: LeaderboardUpdateManyWithWhereWithoutGameInput | LeaderboardUpdateManyWithWhereWithoutGameInput[]
-    deleteMany?: LeaderboardScalarWhereInput | LeaderboardScalarWhereInput[]
-  }
-
   export type GameCreateNestedOneWithoutCharactersInput = {
     create?: XOR<GameCreateWithoutCharactersInput, GameUncheckedCreateWithoutCharactersInput>
     connectOrCreate?: GameCreateOrConnectWithoutCharactersInput
@@ -7024,18 +6821,16 @@ export namespace Prisma {
     connect?: GameWhereUniqueInput
   }
 
-  export type LeaderboardCreateNestedManyWithoutRoundInput = {
-    create?: XOR<LeaderboardCreateWithoutRoundInput, LeaderboardUncheckedCreateWithoutRoundInput> | LeaderboardCreateWithoutRoundInput[] | LeaderboardUncheckedCreateWithoutRoundInput[]
-    connectOrCreate?: LeaderboardCreateOrConnectWithoutRoundInput | LeaderboardCreateOrConnectWithoutRoundInput[]
-    createMany?: LeaderboardCreateManyRoundInputEnvelope
-    connect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
+  export type LeaderboardCreateNestedOneWithoutRoundInput = {
+    create?: XOR<LeaderboardCreateWithoutRoundInput, LeaderboardUncheckedCreateWithoutRoundInput>
+    connectOrCreate?: LeaderboardCreateOrConnectWithoutRoundInput
+    connect?: LeaderboardWhereUniqueInput
   }
 
-  export type LeaderboardUncheckedCreateNestedManyWithoutRoundInput = {
-    create?: XOR<LeaderboardCreateWithoutRoundInput, LeaderboardUncheckedCreateWithoutRoundInput> | LeaderboardCreateWithoutRoundInput[] | LeaderboardUncheckedCreateWithoutRoundInput[]
-    connectOrCreate?: LeaderboardCreateOrConnectWithoutRoundInput | LeaderboardCreateOrConnectWithoutRoundInput[]
-    createMany?: LeaderboardCreateManyRoundInputEnvelope
-    connect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
+  export type LeaderboardUncheckedCreateNestedOneWithoutRoundInput = {
+    create?: XOR<LeaderboardCreateWithoutRoundInput, LeaderboardUncheckedCreateWithoutRoundInput>
+    connectOrCreate?: LeaderboardCreateOrConnectWithoutRoundInput
+    connect?: LeaderboardWhereUniqueInput
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -7051,10 +6846,6 @@ export namespace Prisma {
     push?: number | number[]
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type GameUpdateOneRequiredWithoutRoundsNestedInput = {
     create?: XOR<GameCreateWithoutRoundsInput, GameUncheckedCreateWithoutRoundsInput>
     connectOrCreate?: GameCreateOrConnectWithoutRoundsInput
@@ -7063,38 +6854,24 @@ export namespace Prisma {
     update?: XOR<XOR<GameUpdateToOneWithWhereWithoutRoundsInput, GameUpdateWithoutRoundsInput>, GameUncheckedUpdateWithoutRoundsInput>
   }
 
-  export type LeaderboardUpdateManyWithoutRoundNestedInput = {
-    create?: XOR<LeaderboardCreateWithoutRoundInput, LeaderboardUncheckedCreateWithoutRoundInput> | LeaderboardCreateWithoutRoundInput[] | LeaderboardUncheckedCreateWithoutRoundInput[]
-    connectOrCreate?: LeaderboardCreateOrConnectWithoutRoundInput | LeaderboardCreateOrConnectWithoutRoundInput[]
-    upsert?: LeaderboardUpsertWithWhereUniqueWithoutRoundInput | LeaderboardUpsertWithWhereUniqueWithoutRoundInput[]
-    createMany?: LeaderboardCreateManyRoundInputEnvelope
-    set?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    disconnect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    delete?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    connect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    update?: LeaderboardUpdateWithWhereUniqueWithoutRoundInput | LeaderboardUpdateWithWhereUniqueWithoutRoundInput[]
-    updateMany?: LeaderboardUpdateManyWithWhereWithoutRoundInput | LeaderboardUpdateManyWithWhereWithoutRoundInput[]
-    deleteMany?: LeaderboardScalarWhereInput | LeaderboardScalarWhereInput[]
+  export type LeaderboardUpdateOneWithoutRoundNestedInput = {
+    create?: XOR<LeaderboardCreateWithoutRoundInput, LeaderboardUncheckedCreateWithoutRoundInput>
+    connectOrCreate?: LeaderboardCreateOrConnectWithoutRoundInput
+    upsert?: LeaderboardUpsertWithoutRoundInput
+    disconnect?: LeaderboardWhereInput | boolean
+    delete?: LeaderboardWhereInput | boolean
+    connect?: LeaderboardWhereUniqueInput
+    update?: XOR<XOR<LeaderboardUpdateToOneWithWhereWithoutRoundInput, LeaderboardUpdateWithoutRoundInput>, LeaderboardUncheckedUpdateWithoutRoundInput>
   }
 
-  export type LeaderboardUncheckedUpdateManyWithoutRoundNestedInput = {
-    create?: XOR<LeaderboardCreateWithoutRoundInput, LeaderboardUncheckedCreateWithoutRoundInput> | LeaderboardCreateWithoutRoundInput[] | LeaderboardUncheckedCreateWithoutRoundInput[]
-    connectOrCreate?: LeaderboardCreateOrConnectWithoutRoundInput | LeaderboardCreateOrConnectWithoutRoundInput[]
-    upsert?: LeaderboardUpsertWithWhereUniqueWithoutRoundInput | LeaderboardUpsertWithWhereUniqueWithoutRoundInput[]
-    createMany?: LeaderboardCreateManyRoundInputEnvelope
-    set?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    disconnect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    delete?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    connect?: LeaderboardWhereUniqueInput | LeaderboardWhereUniqueInput[]
-    update?: LeaderboardUpdateWithWhereUniqueWithoutRoundInput | LeaderboardUpdateWithWhereUniqueWithoutRoundInput[]
-    updateMany?: LeaderboardUpdateManyWithWhereWithoutRoundInput | LeaderboardUpdateManyWithWhereWithoutRoundInput[]
-    deleteMany?: LeaderboardScalarWhereInput | LeaderboardScalarWhereInput[]
-  }
-
-  export type GameCreateNestedOneWithoutLeaderboardInput = {
-    create?: XOR<GameCreateWithoutLeaderboardInput, GameUncheckedCreateWithoutLeaderboardInput>
-    connectOrCreate?: GameCreateOrConnectWithoutLeaderboardInput
-    connect?: GameWhereUniqueInput
+  export type LeaderboardUncheckedUpdateOneWithoutRoundNestedInput = {
+    create?: XOR<LeaderboardCreateWithoutRoundInput, LeaderboardUncheckedCreateWithoutRoundInput>
+    connectOrCreate?: LeaderboardCreateOrConnectWithoutRoundInput
+    upsert?: LeaderboardUpsertWithoutRoundInput
+    disconnect?: LeaderboardWhereInput | boolean
+    delete?: LeaderboardWhereInput | boolean
+    connect?: LeaderboardWhereUniqueInput
+    update?: XOR<XOR<LeaderboardUpdateToOneWithWhereWithoutRoundInput, LeaderboardUpdateWithoutRoundInput>, LeaderboardUncheckedUpdateWithoutRoundInput>
   }
 
   export type RoundCreateNestedOneWithoutLeaderboardInput = {
@@ -7103,12 +6880,8 @@ export namespace Prisma {
     connect?: RoundWhereUniqueInput
   }
 
-  export type GameUpdateOneRequiredWithoutLeaderboardNestedInput = {
-    create?: XOR<GameCreateWithoutLeaderboardInput, GameUncheckedCreateWithoutLeaderboardInput>
-    connectOrCreate?: GameCreateOrConnectWithoutLeaderboardInput
-    upsert?: GameUpsertWithoutLeaderboardInput
-    connect?: GameWhereUniqueInput
-    update?: XOR<XOR<GameUpdateToOneWithWhereWithoutLeaderboardInput, GameUpdateWithoutLeaderboardInput>, GameUncheckedUpdateWithoutLeaderboardInput>
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type RoundUpdateOneRequiredWithoutLeaderboardNestedInput = {
@@ -7265,20 +7038,6 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -7305,6 +7064,20 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -7358,8 +7131,7 @@ export namespace Prisma {
     start?: Date | string
     end?: Date | string | null
     hits?: RoundCreatehitsInput | number[]
-    playerName?: string | null
-    Leaderboard?: LeaderboardCreateNestedManyWithoutRoundInput
+    Leaderboard?: LeaderboardCreateNestedOneWithoutRoundInput
   }
 
   export type RoundUncheckedCreateWithoutGameInput = {
@@ -7367,8 +7139,7 @@ export namespace Prisma {
     start?: Date | string
     end?: Date | string | null
     hits?: RoundCreatehitsInput | number[]
-    playerName?: string | null
-    Leaderboard?: LeaderboardUncheckedCreateNestedManyWithoutRoundInput
+    Leaderboard?: LeaderboardUncheckedCreateNestedOneWithoutRoundInput
   }
 
   export type RoundCreateOrConnectWithoutGameInput = {
@@ -7378,29 +7149,6 @@ export namespace Prisma {
 
   export type RoundCreateManyGameInputEnvelope = {
     data: RoundCreateManyGameInput | RoundCreateManyGameInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type LeaderboardCreateWithoutGameInput = {
-    seconds: number
-    playerName: string
-    Round: RoundCreateNestedOneWithoutLeaderboardInput
-  }
-
-  export type LeaderboardUncheckedCreateWithoutGameInput = {
-    id?: number
-    seconds: number
-    playerName: string
-    roundId: string
-  }
-
-  export type LeaderboardCreateOrConnectWithoutGameInput = {
-    where: LeaderboardWhereUniqueInput
-    create: XOR<LeaderboardCreateWithoutGameInput, LeaderboardUncheckedCreateWithoutGameInput>
-  }
-
-  export type LeaderboardCreateManyGameInputEnvelope = {
-    data: LeaderboardCreateManyGameInput | LeaderboardCreateManyGameInput[]
     skipDuplicates?: boolean
   }
 
@@ -7459,34 +7207,6 @@ export namespace Prisma {
     end?: DateTimeNullableFilter<"Round"> | Date | string | null
     gameId?: IntFilter<"Round"> | number
     hits?: IntNullableListFilter<"Round">
-    playerName?: StringNullableFilter<"Round"> | string | null
-  }
-
-  export type LeaderboardUpsertWithWhereUniqueWithoutGameInput = {
-    where: LeaderboardWhereUniqueInput
-    update: XOR<LeaderboardUpdateWithoutGameInput, LeaderboardUncheckedUpdateWithoutGameInput>
-    create: XOR<LeaderboardCreateWithoutGameInput, LeaderboardUncheckedCreateWithoutGameInput>
-  }
-
-  export type LeaderboardUpdateWithWhereUniqueWithoutGameInput = {
-    where: LeaderboardWhereUniqueInput
-    data: XOR<LeaderboardUpdateWithoutGameInput, LeaderboardUncheckedUpdateWithoutGameInput>
-  }
-
-  export type LeaderboardUpdateManyWithWhereWithoutGameInput = {
-    where: LeaderboardScalarWhereInput
-    data: XOR<LeaderboardUpdateManyMutationInput, LeaderboardUncheckedUpdateManyWithoutGameInput>
-  }
-
-  export type LeaderboardScalarWhereInput = {
-    AND?: LeaderboardScalarWhereInput | LeaderboardScalarWhereInput[]
-    OR?: LeaderboardScalarWhereInput[]
-    NOT?: LeaderboardScalarWhereInput | LeaderboardScalarWhereInput[]
-    id?: IntFilter<"Leaderboard"> | number
-    seconds?: IntFilter<"Leaderboard"> | number
-    gameId?: IntFilter<"Leaderboard"> | number
-    playerName?: StringFilter<"Leaderboard"> | string
-    roundId?: StringFilter<"Leaderboard"> | string
   }
 
   export type GameCreateWithoutCharactersInput = {
@@ -7494,7 +7214,6 @@ export namespace Prisma {
     link: string
     difficulty?: $Enums.Difficulty
     Rounds?: RoundCreateNestedManyWithoutGameInput
-    Leaderboard?: LeaderboardCreateNestedManyWithoutGameInput
   }
 
   export type GameUncheckedCreateWithoutCharactersInput = {
@@ -7503,7 +7222,6 @@ export namespace Prisma {
     link: string
     difficulty?: $Enums.Difficulty
     Rounds?: RoundUncheckedCreateNestedManyWithoutGameInput
-    Leaderboard?: LeaderboardUncheckedCreateNestedManyWithoutGameInput
   }
 
   export type GameCreateOrConnectWithoutCharactersInput = {
@@ -7527,7 +7245,6 @@ export namespace Prisma {
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     Rounds?: RoundUpdateManyWithoutGameNestedInput
-    Leaderboard?: LeaderboardUpdateManyWithoutGameNestedInput
   }
 
   export type GameUncheckedUpdateWithoutCharactersInput = {
@@ -7536,7 +7253,6 @@ export namespace Prisma {
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     Rounds?: RoundUncheckedUpdateManyWithoutGameNestedInput
-    Leaderboard?: LeaderboardUncheckedUpdateManyWithoutGameNestedInput
   }
 
   export type GameCreateWithoutRoundsInput = {
@@ -7544,7 +7260,6 @@ export namespace Prisma {
     link: string
     difficulty?: $Enums.Difficulty
     Characters?: CharacterCreateNestedManyWithoutGameInput
-    Leaderboard?: LeaderboardCreateNestedManyWithoutGameInput
   }
 
   export type GameUncheckedCreateWithoutRoundsInput = {
@@ -7553,7 +7268,6 @@ export namespace Prisma {
     link: string
     difficulty?: $Enums.Difficulty
     Characters?: CharacterUncheckedCreateNestedManyWithoutGameInput
-    Leaderboard?: LeaderboardUncheckedCreateNestedManyWithoutGameInput
   }
 
   export type GameCreateOrConnectWithoutRoundsInput = {
@@ -7563,25 +7277,18 @@ export namespace Prisma {
 
   export type LeaderboardCreateWithoutRoundInput = {
     seconds: number
-    playerName: string
-    Game: GameCreateNestedOneWithoutLeaderboardInput
+    playerName?: string | null
   }
 
   export type LeaderboardUncheckedCreateWithoutRoundInput = {
     id?: number
     seconds: number
-    gameId: number
-    playerName: string
+    playerName?: string | null
   }
 
   export type LeaderboardCreateOrConnectWithoutRoundInput = {
     where: LeaderboardWhereUniqueInput
     create: XOR<LeaderboardCreateWithoutRoundInput, LeaderboardUncheckedCreateWithoutRoundInput>
-  }
-
-  export type LeaderboardCreateManyRoundInputEnvelope = {
-    data: LeaderboardCreateManyRoundInput | LeaderboardCreateManyRoundInput[]
-    skipDuplicates?: boolean
   }
 
   export type GameUpsertWithoutRoundsInput = {
@@ -7600,7 +7307,6 @@ export namespace Prisma {
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     Characters?: CharacterUpdateManyWithoutGameNestedInput
-    Leaderboard?: LeaderboardUpdateManyWithoutGameNestedInput
   }
 
   export type GameUncheckedUpdateWithoutRoundsInput = {
@@ -7609,45 +7315,28 @@ export namespace Prisma {
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     Characters?: CharacterUncheckedUpdateManyWithoutGameNestedInput
-    Leaderboard?: LeaderboardUncheckedUpdateManyWithoutGameNestedInput
   }
 
-  export type LeaderboardUpsertWithWhereUniqueWithoutRoundInput = {
-    where: LeaderboardWhereUniqueInput
+  export type LeaderboardUpsertWithoutRoundInput = {
     update: XOR<LeaderboardUpdateWithoutRoundInput, LeaderboardUncheckedUpdateWithoutRoundInput>
     create: XOR<LeaderboardCreateWithoutRoundInput, LeaderboardUncheckedCreateWithoutRoundInput>
+    where?: LeaderboardWhereInput
   }
 
-  export type LeaderboardUpdateWithWhereUniqueWithoutRoundInput = {
-    where: LeaderboardWhereUniqueInput
+  export type LeaderboardUpdateToOneWithWhereWithoutRoundInput = {
+    where?: LeaderboardWhereInput
     data: XOR<LeaderboardUpdateWithoutRoundInput, LeaderboardUncheckedUpdateWithoutRoundInput>
   }
 
-  export type LeaderboardUpdateManyWithWhereWithoutRoundInput = {
-    where: LeaderboardScalarWhereInput
-    data: XOR<LeaderboardUpdateManyMutationInput, LeaderboardUncheckedUpdateManyWithoutRoundInput>
+  export type LeaderboardUpdateWithoutRoundInput = {
+    seconds?: IntFieldUpdateOperationsInput | number
+    playerName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type GameCreateWithoutLeaderboardInput = {
-    name: string
-    link: string
-    difficulty?: $Enums.Difficulty
-    Characters?: CharacterCreateNestedManyWithoutGameInput
-    Rounds?: RoundCreateNestedManyWithoutGameInput
-  }
-
-  export type GameUncheckedCreateWithoutLeaderboardInput = {
-    id?: number
-    name: string
-    link: string
-    difficulty?: $Enums.Difficulty
-    Characters?: CharacterUncheckedCreateNestedManyWithoutGameInput
-    Rounds?: RoundUncheckedCreateNestedManyWithoutGameInput
-  }
-
-  export type GameCreateOrConnectWithoutLeaderboardInput = {
-    where: GameWhereUniqueInput
-    create: XOR<GameCreateWithoutLeaderboardInput, GameUncheckedCreateWithoutLeaderboardInput>
+  export type LeaderboardUncheckedUpdateWithoutRoundInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    seconds?: IntFieldUpdateOperationsInput | number
+    playerName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RoundCreateWithoutLeaderboardInput = {
@@ -7655,7 +7344,6 @@ export namespace Prisma {
     start?: Date | string
     end?: Date | string | null
     hits?: RoundCreatehitsInput | number[]
-    playerName?: string | null
     Game: GameCreateNestedOneWithoutRoundsInput
   }
 
@@ -7665,40 +7353,11 @@ export namespace Prisma {
     end?: Date | string | null
     gameId: number
     hits?: RoundCreatehitsInput | number[]
-    playerName?: string | null
   }
 
   export type RoundCreateOrConnectWithoutLeaderboardInput = {
     where: RoundWhereUniqueInput
     create: XOR<RoundCreateWithoutLeaderboardInput, RoundUncheckedCreateWithoutLeaderboardInput>
-  }
-
-  export type GameUpsertWithoutLeaderboardInput = {
-    update: XOR<GameUpdateWithoutLeaderboardInput, GameUncheckedUpdateWithoutLeaderboardInput>
-    create: XOR<GameCreateWithoutLeaderboardInput, GameUncheckedCreateWithoutLeaderboardInput>
-    where?: GameWhereInput
-  }
-
-  export type GameUpdateToOneWithWhereWithoutLeaderboardInput = {
-    where?: GameWhereInput
-    data: XOR<GameUpdateWithoutLeaderboardInput, GameUncheckedUpdateWithoutLeaderboardInput>
-  }
-
-  export type GameUpdateWithoutLeaderboardInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
-    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
-    Characters?: CharacterUpdateManyWithoutGameNestedInput
-    Rounds?: RoundUpdateManyWithoutGameNestedInput
-  }
-
-  export type GameUncheckedUpdateWithoutLeaderboardInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
-    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
-    Characters?: CharacterUncheckedUpdateManyWithoutGameNestedInput
-    Rounds?: RoundUncheckedUpdateManyWithoutGameNestedInput
   }
 
   export type RoundUpsertWithoutLeaderboardInput = {
@@ -7717,7 +7376,6 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     hits?: RoundUpdatehitsInput | number[]
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
     Game?: GameUpdateOneRequiredWithoutRoundsNestedInput
   }
 
@@ -7727,7 +7385,6 @@ export namespace Prisma {
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gameId?: IntFieldUpdateOperationsInput | number
     hits?: RoundUpdatehitsInput | number[]
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CharacterCreateManyGameInput = {
@@ -7745,14 +7402,6 @@ export namespace Prisma {
     start?: Date | string
     end?: Date | string | null
     hits?: RoundCreatehitsInput | number[]
-    playerName?: string | null
-  }
-
-  export type LeaderboardCreateManyGameInput = {
-    id?: number
-    seconds: number
-    playerName: string
-    roundId: string
   }
 
   export type CharacterUpdateWithoutGameInput = {
@@ -7789,8 +7438,7 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     hits?: RoundUpdatehitsInput | number[]
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
-    Leaderboard?: LeaderboardUpdateManyWithoutRoundNestedInput
+    Leaderboard?: LeaderboardUpdateOneWithoutRoundNestedInput
   }
 
   export type RoundUncheckedUpdateWithoutGameInput = {
@@ -7798,8 +7446,7 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     hits?: RoundUpdatehitsInput | number[]
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
-    Leaderboard?: LeaderboardUncheckedUpdateManyWithoutRoundNestedInput
+    Leaderboard?: LeaderboardUncheckedUpdateOneWithoutRoundNestedInput
   }
 
   export type RoundUncheckedUpdateManyWithoutGameInput = {
@@ -7807,54 +7454,6 @@ export namespace Prisma {
     start?: DateTimeFieldUpdateOperationsInput | Date | string
     end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     hits?: RoundUpdatehitsInput | number[]
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type LeaderboardUpdateWithoutGameInput = {
-    seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: StringFieldUpdateOperationsInput | string
-    Round?: RoundUpdateOneRequiredWithoutLeaderboardNestedInput
-  }
-
-  export type LeaderboardUncheckedUpdateWithoutGameInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: StringFieldUpdateOperationsInput | string
-    roundId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type LeaderboardUncheckedUpdateManyWithoutGameInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: StringFieldUpdateOperationsInput | string
-    roundId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type LeaderboardCreateManyRoundInput = {
-    id?: number
-    seconds: number
-    gameId: number
-    playerName: string
-  }
-
-  export type LeaderboardUpdateWithoutRoundInput = {
-    seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: StringFieldUpdateOperationsInput | string
-    Game?: GameUpdateOneRequiredWithoutLeaderboardNestedInput
-  }
-
-  export type LeaderboardUncheckedUpdateWithoutRoundInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    seconds?: IntFieldUpdateOperationsInput | number
-    gameId?: IntFieldUpdateOperationsInput | number
-    playerName?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type LeaderboardUncheckedUpdateManyWithoutRoundInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    seconds?: IntFieldUpdateOperationsInput | number
-    gameId?: IntFieldUpdateOperationsInput | number
-    playerName?: StringFieldUpdateOperationsInput | string
   }
 
 

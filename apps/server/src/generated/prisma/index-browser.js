@@ -143,14 +143,12 @@ exports.Prisma.RoundScalarFieldEnum = {
   start: 'start',
   end: 'end',
   gameId: 'gameId',
-  hits: 'hits',
-  playerName: 'playerName'
+  hits: 'hits'
 };
 
 exports.Prisma.LeaderboardScalarFieldEnum = {
   id: 'id',
   seconds: 'seconds',
-  gameId: 'gameId',
   playerName: 'playerName',
   roundId: 'roundId'
 };

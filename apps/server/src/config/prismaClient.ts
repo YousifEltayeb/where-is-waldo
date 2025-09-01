@@ -1,5 +1,5 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { PrismaClient, Difficulty } from '../generated/prisma';
+import { PrismaClient, Difficulty, Prisma } from '../generated/prisma';
 
 export const prisma = new PrismaClient();
-export { Difficulty };
+export { Difficulty, Prisma };

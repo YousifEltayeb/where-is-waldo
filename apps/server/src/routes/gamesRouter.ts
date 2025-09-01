@@ -1,13 +1,6 @@
 import { Router } from 'express';
-import {
-  getGames,
-  createRound,
-  getLeaderboard,
-} from '../controllers/gamesControllers';
+import { getGames } from '../controllers/gamesControllers';
 const games = Router();
-games.get('/', getGames);
-games.get('/leaderboard', getLeaderboard);
-games.post('/:gameId/rounds', createRound);
-games.patch('/rounds', updateRound);
+games.get('/games', getGames);
 
 export default games;

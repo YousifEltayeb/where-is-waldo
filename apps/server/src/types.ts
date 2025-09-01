@@ -26,3 +26,14 @@ export interface AddPlayerNameRequestType extends Request {
     username: string;
   };
 }
+
+export interface UpdateRoundType extends Request {
+  user: { id: string };
+  body: {
+    characterId?: string;
+    xCoordinate?: string;
+    yCoordinate?: string;
+  };
+  round?: Round;
+  character?: Character;
+}

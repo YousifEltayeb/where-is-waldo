@@ -1,7 +1,10 @@
 import { Router } from 'express';
-import { getLeaderboard } from '../controllers/leaderboardController';
+import {
+  getLeaderboard,
+  updatePlayerName,
+} from '../controllers/leaderboardController';
 const leaderboard = Router();
 leaderboard.get('/leaderboard', getLeaderboard);
-// leaderboard.post('/leaderboard', updatePlayerName);
+leaderboard.post('/leaderboard', updatePlayerName);
 
 export default leaderboard;

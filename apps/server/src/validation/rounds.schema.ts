@@ -40,3 +40,6 @@ export const CheckHitValidationSchema = z.object({
   xCoordinate: z.coerce.number().int().positive(),
   yCoordinate: z.coerce.number().int().positive(),
 });
+export const UpdatePlayerNameValidationSchema = z.object({
+  playerName: z.string().min(1),
+});

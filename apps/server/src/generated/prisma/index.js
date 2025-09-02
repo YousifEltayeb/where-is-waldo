@@ -201,7 +201,7 @@ const config = {
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Game {\n  id         Int         @id @default(autoincrement())\n  name       String      @unique\n  link       String      @unique\n  difficulty Difficulty  @default(EASY)\n  Characters Character[]\n  Rounds     Round[]\n\n  @@map(\"games\")\n}\n\nmodel Character {\n  id     Int    @id @default(autoincrement())\n  name   String @unique\n  link   String @unique\n  Game   Game?  @relation(fields: [gameId], references: [id])\n  gameId Int?\n  xStart Int\n  xEnd   Int\n  yStart Int\n  yEnd   Int\n\n  @@map(\"characters\")\n}\n\nmodel Round {\n  id          String       @id @default(uuid())\n  start       DateTime     @default(now())\n  end         DateTime?\n  Game        Game         @relation(fields: [gameId], references: [id])\n  gameId      Int\n  hits        Int[]\n  Leaderboard Leaderboard?\n\n  @@map(\"rounds\")\n}\n\nmodel Leaderboard {\n  id         Int     @id @default(autoincrement())\n  seconds    Int\n  playerName String?\n  Round      Round   @relation(fields: [roundId], references: [id])\n  roundId    String  @unique\n\n  @@map(\"leaderboard\")\n}\n\nenum Difficulty {\n  EASY\n  MEDIUM\n  HARD\n}\n",
   "inlineSchemaHash": "499d20c87289823606d246eec05d8c027c665aab23c7003369193ee22b7f8be6",
-  "copyEngine": false
+  "copyEngine": true
 }
 
 const fs = require('fs')
@@ -238,3 +238,9 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "src/generated/prisma/libquery_engine-debian-openssl-3.0.x.so.node")
+// file annotations for bundling tools to include these files
+path.join(__dirname, "schema.prisma");
+path.join(process.cwd(), "src/generated/prisma/schema.prisma")

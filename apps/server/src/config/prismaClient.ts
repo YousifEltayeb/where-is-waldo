@@ -2,5 +2,15 @@
 import { PrismaClient, Difficulty, Prisma } from '../generated/prisma';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import type { Round } from '../generated/prisma';
-export const prisma = new PrismaClient();
+const databaseUrl =
+  process.env.NODE_ENV === 'test'
+    ? process.env.TEST_DATABASE_URL
+    : process.env.DATABASE_URL;
+export const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: databaseUrl,
+    },
+  },
+});
 export { Difficulty, Prisma, Round };

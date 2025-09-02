@@ -1,6 +1,8 @@
 {
   "name": "@where-is-waldo/server",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/client/src",
+  "projectType": "application",
   "targets": {
     "build": {
       "executor": "@nx/esbuild:esbuild",
@@ -75,7 +77,19 @@
           "buildTarget": "@where-is-waldo/server:build:production"
         }
       }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+
+      "options": {
+        "config": "apps/server/vitest.config.ts"
+      },
+
+      "configurations": {
+        "watch": {
+          "watch": true
+        }
+      }
     }
   }
 }
-

@@ -207,3 +207,5 @@ seedGames()
   .catch((err) => {
     console.error(err);
   });
+
+export { seedCharacters, seedGames };

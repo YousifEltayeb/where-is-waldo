@@ -4,6 +4,7 @@ import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import { CreateRoundValidationSchema } from '../validation/rounds.schema';
 import { z } from 'zod';
+
 const validateCreateRound: RequestHandler = async (req, res, next) => {
   try {
     await CreateRoundValidationSchema.parseAsync(req.body);

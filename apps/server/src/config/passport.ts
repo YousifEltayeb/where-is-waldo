@@ -4,6 +4,8 @@ import passportJWT from 'passport-jwt';
 
 import 'dotenv/config';
 
+
+
 const SECRET = process.env.SECRET;
 const JwtStrategy = passportJWT.Strategy;
 const ExtractJwt = passportJWT.ExtractJwt;

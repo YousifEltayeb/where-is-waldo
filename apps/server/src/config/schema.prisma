@@ -29,7 +29,7 @@ model Character {
     id     Int    @id @default(autoincrement())
     name   String @unique
     link   String @unique
-    Game   Game?  @relation(fields: [gameId], references: [id])
+    Game   Game?  @relation(fields: [gameId], references: [id], onDelete: Cascade)
     gameId Int?
     xStart Int
     xEnd   Int
@@ -43,7 +43,7 @@ model Round {
     id          String       @id @default(uuid())
     start       DateTime     @default(now())
     end         DateTime?
-    Game        Game         @relation(fields: [gameId], references: [id])
+    Game        Game         @relation(fields: [gameId], references: [id], onDelete: Cascade)
     gameId      Int
     hits        Int[]
     Leaderboard Leaderboard?
@@ -55,7 +55,7 @@ model Leaderboard {
     id         Int     @id @default(autoincrement())
     seconds    Int
     playerName String?
-    Round      Round   @relation(fields: [roundId], references: [id])
+    Round      Round   @relation(fields: [roundId], references: [id], onDelete: Cascade)
     roundId    String  @unique
 
     @@map("leaderboard")

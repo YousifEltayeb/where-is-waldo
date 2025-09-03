@@ -40,7 +40,12 @@ async function seedGames() {
   if (typeof gamesUrls === 'undefined') {
     throw new Error('no urls');
   }
+  // Delete in reverse order of dependency
   await prisma.game.deleteMany();
+  await prisma.character.deleteMany();
+  await prisma.round.deleteMany();
+  await prisma.leaderboard.deleteMany();
+
   await prisma.game.createMany({
     data: [
       {
@@ -83,7 +88,6 @@ async function seedCharacters() {
   const rainforst: any = await prisma.game.findUnique({
     where: { name: 'Rainforest' },
   });
-  await prisma.character.deleteMany();
   {
     await prisma.character.createMany({
       data: [
@@ -202,10 +206,50 @@ async function seedCharacters() {
   }
 }
 
-seedGames()
-  .then(() => seedCharacters())
-  .catch((err) => {
-    console.error(err);
+async function seedRoundsAndLeaderboard() {
+  const floatingIsland: any = await prisma.game.findUnique({
+    where: { name: 'Floating Island' },
+  });
+  const cityport: any = await prisma.game.findUnique({
+    where: { name: 'Cityport' },
+  });
+  const medievalFloatingVillage: any = await prisma.game.findUnique({
+    where: { name: 'Medieval Floating Village' },
+  });
+  const rainforst: any = await prisma.game.findUnique({
+    where: { name: 'Rainforest' },
+  });
+  const rounds = await prisma.round.createManyAndReturn({
+    data: [
+      {
+        end: new Date(),
+        gameId: floatingIsland.id,
+        hits: [7, 9, 11],
+      },
+      {
+        gameId: cityport.id,
+        hits: [1, 4, 10],
+        end: new Date(),
+      },
+      {
+        gameId: rainforst.id,
+      },
+    ],
   });
 
-export { seedCharacters, seedGames };
+  await prisma.leaderboard.createMany({
+    data: [
+      { seconds: 123, playerName: null, roundId: rounds[0].id },
+      { seconds: 321, playerName: 'Flan Alflany', roundId: rounds[1].id },
+    ],
+  });
+}
+
+// seedGames()
+//   .then(() => seedCharacters())
+//   .then(() => seedRoundsAndLeaderboard())
+//   .catch((err) => {
+//     console.error(err);
+//   });
+export { seedCharacters, seedGames, seedRoundsAndLeaderboard };
+

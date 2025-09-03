@@ -7,6 +7,7 @@ import { UpdatePlayerNameRequestType } from '../types';
 export const getLeaderboard: RequestHandler = async (req, res) => {
   try {
     const leaderboardData = await prisma.leaderboard.findMany({
+      omit: { roundId: true },
       include: {
         Round: {
           select: { Game: { select: { name: true } } },

@@ -82,7 +82,8 @@
       "executor": "@nx/vite:test",
 
       "options": {
-        "config": "apps/server/vitest.config.ts"
+        "config": "apps/server/vitest.config.ts",
+        "envFile": "{projectRoot}/.env.test"
       },
 
       "configurations": {
@@ -93,3 +94,4 @@
     }
   }
 }
+

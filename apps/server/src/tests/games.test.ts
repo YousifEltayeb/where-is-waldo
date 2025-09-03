@@ -1,4 +1,9 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import {
+  seedCharacters,
+  seedGames,
+  seedRoundsAndLeaderboard,
+} from '../config/seed';
 import express from 'express';
 import gamesRouter from '../routes/gamesRouter';
 import request from 'supertest';
@@ -17,7 +22,13 @@ describe('/games', function () {
     difficulty: string;
     Characters: Array<object>;
   }
-  it('test games router', async () => {
+
+  beforeEach(async () => {
+    await seedGames();
+    await seedCharacters();
+    await seedRoundsAndLeaderboard();
+  });
+  it('GET /games should return 200 and an array of Game objects', async () => {
     const response = await request(app)
       .get(API_VERSION + '/games')
       .set('Accept', 'application/json');

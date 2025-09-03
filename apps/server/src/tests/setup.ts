@@ -1,6 +1,12 @@
-import { beforeAll } from 'vitest';
-// import { seedGames, seedCharacters } from '../config/seed';
-beforeAll(async () => {
-  // await seedGames();
-  // await seedCharacters();
-});
+// import { beforeEach } from 'vitest';
+// import {
+//   seedCharacters,
+//   seedGames,
+//   seedRoundsAndLeaderboard,
+// } from '../config/seed';
+//
+// beforeEach(async () => {
+//   await seedGames();
+//   await seedCharacters();
+//   await seedRoundsAndLeaderboard();
+// });

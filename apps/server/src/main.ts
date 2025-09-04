@@ -19,7 +19,7 @@ app.use(API_VERSION + '/', gamesRouter);
 app.use(API_VERSION + '/', leaderboardRouter);
 app.use(API_VERSION + '/', roundsRouter);
 
-app.all('/{*splat}', (req, res) => {
+app.all('/{*splat}', (req: Request, res) => {
   res.status(404).json({ error: "this route doesn't exist" });
 });
 

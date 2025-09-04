@@ -1,28 +1,17 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import {
-  seedCharacters,
-  seedGames,
-  seedRoundsAndLeaderboard,
-} from '../config/seed';
-import express from 'express';
 import gamesRouter from '../routes/gamesRouter';
 import request from 'supertest';
-const app = express();
-const API_VERSION = '/api/v1';
+import { Game } from '../config/prismaClient';
+import { createTestApp, API_VERSION } from './setup';
+import {
+  seedGames,
+  seedCharacters,
+  seedRoundsAndLeaderboard,
+} from '../config/seed';
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const app = createTestApp(gamesRouter);
 
-app.use(API_VERSION + '/', gamesRouter);
 describe('/games', function () {
-  interface Game {
-    id: number;
-    name: string;
-    link: string;
-    difficulty: string;
-    Characters: Array<object>;
-  }
-
   beforeEach(async () => {
     await seedGames();
     await seedCharacters();

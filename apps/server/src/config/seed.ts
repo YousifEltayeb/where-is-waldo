@@ -213,9 +213,6 @@ async function seedRoundsAndLeaderboard() {
   const cityport: any = await prisma.game.findUnique({
     where: { name: 'Cityport' },
   });
-  const medievalFloatingVillage: any = await prisma.game.findUnique({
-    where: { name: 'Medieval Floating Village' },
-  });
   const rainforst: any = await prisma.game.findUnique({
     where: { name: 'Rainforest' },
   });
@@ -244,7 +241,7 @@ async function seedRoundsAndLeaderboard() {
     ],
   });
 }
-
+// omitted for testing
 // seedGames()
 //   .then(() => seedCharacters())
 //   .then(() => seedRoundsAndLeaderboard())
@@ -252,4 +249,3 @@ async function seedRoundsAndLeaderboard() {
 //     console.error(err);
 //   });
 export { seedCharacters, seedGames, seedRoundsAndLeaderboard };
-

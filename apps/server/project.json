@@ -83,7 +83,8 @@
 
       "options": {
         "config": "apps/server/vitest.config.ts",
-        "envFile": "{projectRoot}/.env.test"
+        "envFile": "{projectRoot}/.env.test",
+        "parallel": false
       },
 
       "configurations": {

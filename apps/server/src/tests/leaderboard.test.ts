@@ -1,30 +1,23 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import '../config/passport.ts';
-import express from 'express';
 import leaderboardRouter from '../routes/leaderboardRouter';
 import request from 'supertest';
-const app = express();
-const API_VERSION = '/api/v1';
-import { prisma } from '../config/prismaClient';
+import { prisma, Leaderboard } from '../config/prismaClient';
+import jwt from 'jsonwebtoken';
+import { createTestApp, API_VERSION } from './setup';
 import {
-  seedCharacters,
   seedGames,
+  seedCharacters,
   seedRoundsAndLeaderboard,
 } from '../config/seed';
-import jwt from 'jsonwebtoken';
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+const app = createTestApp(leaderboardRouter);
 
-app.use(API_VERSION + '/', leaderboardRouter);
 describe('/leaderboard', function () {
   let roundId = '';
   let token = '';
   const SECRET = process.env.SECRET;
-  interface Leaderboard {
-    id: number;
-    playerName: string;
-    seconds: number;
+  interface ExtendedLeaderboard extends Leaderboard {
     Round: object;
   }
 
@@ -54,7 +47,7 @@ describe('/leaderboard', function () {
     expect(response.headers['content-type']).toMatch(/json/);
     expect(response.status).toEqual(200);
     expect(response.body).toBeInstanceOf(Array);
-    response.body.forEach((record: Leaderboard) => {
+    response.body.forEach((record: ExtendedLeaderboard) => {
       expect(record).toEqual({
         id: expect.any(Number),
         playerName: expect.toBeOneOf([expect.any(String), null]),

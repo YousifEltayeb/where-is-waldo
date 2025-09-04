@@ -50,7 +50,7 @@ const loadGameState = async (
       // check if character already has been hit
     } else if (round.hits.includes(characterId)) {
       // if it wasn't attach round and character to req
-      return res.status(400).json({
+      return res.status(409).json({
         message: 'Character already hit',
       });
     } else {
@@ -91,7 +91,7 @@ const checkHit = async (req: CheckHitRequestType, res: Response) => {
         if (updatedRound.hits.length === 3) {
           await handleEndGame(updatedRound);
         }
-        return res.json({
+        return res.status(201).json({
           xStart: character.xStart,
           xEnd: character.xEnd,
           yStart: character.yStart,
@@ -100,7 +100,7 @@ const checkHit = async (req: CheckHitRequestType, res: Response) => {
         });
       }
     }
-    return res.status(404).json({
+    return res.status(422).json({
       error: 'Wrong coordinates',
     });
   } catch (error) {

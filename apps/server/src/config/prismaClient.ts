@@ -1,7 +1,7 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { PrismaClient, Difficulty, Prisma } from '../generated/prisma';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import type { Round } from '../generated/prisma';
+import type { Leaderboard, Round, Character, Game } from '../generated/prisma';
 export const prisma = new PrismaClient();
 
-export { Difficulty, Prisma, Round };
+export { Difficulty, Prisma, Round, Character, Game, Leaderboard };

@@ -5,7 +5,7 @@ import { z } from 'zod';
 import {
   CheckHitValidationSchema,
   UpdatePlayerNameValidationSchema,
-} from './validation/rounds.schema';
+} from './validation/zod.schema';
 export interface Error {
   statusCode?: number;
   message?: string;

@@ -2,7 +2,7 @@ import { prisma } from '../config/prismaClient';
 import passport from 'passport';
 import { Response, RequestHandler } from 'express';
 import z from 'zod';
-import { UpdatePlayerNameValidationSchema } from '../validation/rounds.schema';
+import { UpdatePlayerNameValidationSchema } from '../validation/zod.schema';
 import { UpdatePlayerNameRequestType } from '../types';
 export const getLeaderboard: RequestHandler = async (req, res) => {
   try {

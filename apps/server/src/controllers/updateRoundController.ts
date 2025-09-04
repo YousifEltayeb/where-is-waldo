@@ -3,7 +3,7 @@ import { NextFunction, Response } from 'express';
 import passport from 'passport';
 import { CheckHitRequestType } from '../types';
 import { z } from 'zod';
-import { CheckHitValidationSchema } from '../validation/rounds.schema';
+import { CheckHitValidationSchema } from '../validation/zod.schema';
 
 const validateRequestBody = async (
   req: CheckHitRequestType,
@@ -38,26 +38,26 @@ const loadGameState = async (
       select: { id: true },
     });
     // find out if character is in this game
-    const charFound = gameCharacters.find((char) => char.id === characterId);
+    const charMatchesGameId = gameCharacters.find(
+      (char) => char.id === characterId
+    );
     // any of them return null return error
-    if (!round || !character || !charFound) {
+    if (!round || !character || !charMatchesGameId) {
       return res.status(400).json({
         message:
           'character or round not found or character doesnt belong to this game',
       });
-      // check if game ended
-    } else if (round.hits.length === 3) {
-      return res.status(400).json({ message: 'Game already over' });
       // check if character already has been hit
-    } else if (!round.hits.includes(characterId)) {
+    } else if (round.hits.includes(characterId)) {
       // if it wasn't attach round and character to req
-      req.round = round;
-      req.character = character;
-      return next();
-    } else
       return res.status(400).json({
         message: 'Character already hit',
       });
+    } else {
+      req.round = round;
+      req.character = character;
+      return next();
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Unexpected server error' });

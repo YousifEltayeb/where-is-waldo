@@ -2,7 +2,7 @@ import { prisma } from '../config/prismaClient';
 import { RequestHandler } from 'express';
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
-import { CreateRoundValidationSchema } from '../validation/rounds.schema';
+import { CreateRoundValidationSchema } from '../validation/zod.schema';
 import { z } from 'zod';
 
 const validateCreateRound: RequestHandler = async (req, res, next) => {

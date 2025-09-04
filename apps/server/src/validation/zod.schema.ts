@@ -34,7 +34,7 @@ export const CheckHitValidationSchema = z.object({
         return game;
       },
       {
-        message: 'Character with the provided ID does not exist.',
+        message: 'Character ID does not exist.',
       }
     ),
   xCoordinate: z.coerce.number().int().positive(),

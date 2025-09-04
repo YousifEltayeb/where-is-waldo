@@ -2,7 +2,9 @@
   "name": "@where-is-waldo/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "test": "npx nx test server"
+  },
   "private": true,
   "devDependencies": {
     "@eslint/js": "^9.8.0",

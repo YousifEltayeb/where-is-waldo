@@ -1,6 +1,11 @@
 import express from 'express';
 import type { Router } from 'express';
-
+import { beforeEach } from 'vitest';
+import {
+  seedGames,
+  seedCharacters,
+  seedRoundsAndLeaderboard,
+} from '../config/seed';
 export const API_VERSION = '/api/v1';
 
 export const createTestApp = (router: Router) => {
@@ -11,3 +16,8 @@ export const createTestApp = (router: Router) => {
   return app;
 };
 
+beforeEach(async () => {
+  await seedGames();
+  await seedCharacters();
+  await seedRoundsAndLeaderboard();
+});

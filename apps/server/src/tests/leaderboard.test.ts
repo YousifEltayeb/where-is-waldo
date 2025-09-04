@@ -5,11 +5,6 @@ import request from 'supertest';
 import { prisma, Leaderboard } from '../config/prismaClient';
 import jwt from 'jsonwebtoken';
 import { createTestApp, API_VERSION } from './setup';
-import {
-  seedGames,
-  seedCharacters,
-  seedRoundsAndLeaderboard,
-} from '../config/seed';
 
 const app = createTestApp(leaderboardRouter);
 
@@ -22,9 +17,6 @@ describe('/leaderboard', function () {
   }
 
   beforeEach(async () => {
-    await seedGames();
-    await seedCharacters();
-    await seedRoundsAndLeaderboard();
     const game = await prisma.game.create({
       data: { name: 'Test Game', link: 'test-game-link' },
     });

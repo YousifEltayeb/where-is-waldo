@@ -1,22 +1,12 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import gamesRouter from '../routes/gamesRouter';
 import request from 'supertest';
 import { Game } from '../config/prismaClient';
 import { createTestApp, API_VERSION } from './setup';
-import {
-  seedGames,
-  seedCharacters,
-  seedRoundsAndLeaderboard,
-} from '../config/seed';
 
 const app = createTestApp(gamesRouter);
 
 describe('/games', function () {
-  beforeEach(async () => {
-    await seedGames();
-    await seedCharacters();
-    await seedRoundsAndLeaderboard();
-  });
   it('GET /games should return 200 and an array of Game objects', async () => {
     const response = await request(app)
       .get(API_VERSION + '/games')

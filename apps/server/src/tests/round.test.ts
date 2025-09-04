@@ -4,11 +4,6 @@ import roundsRouter from '../routes/roundsRouter';
 import request from 'supertest';
 import { prisma, Character } from '../config/prismaClient';
 import { createTestApp, API_VERSION } from './setup';
-import {
-  seedGames,
-  seedCharacters,
-  seedRoundsAndLeaderboard,
-} from '../config/seed';
 
 const app = createTestApp(roundsRouter);
 
@@ -17,9 +12,6 @@ describe('/rounds', function () {
   let characters: Array<Character>;
   let token: string;
   beforeEach(async () => {
-    await seedGames();
-    await seedCharacters();
-    await seedRoundsAndLeaderboard();
     const game = await prisma.game.findFirstOrThrow();
     gameId = game.id;
     characters = await prisma.character.findMany({ where: { gameId } });

@@ -52,21 +52,25 @@ async function seedGames() {
         name: 'Rainforest',
         link: gamesUrls.rainforest,
         difficulty: Difficulty.MEDIUM,
+        imgWidth: 1200,
       },
       {
         name: 'Cityport',
         link: gamesUrls.cityport,
         difficulty: Difficulty.HARD,
+        imgWidth: 3030,
       },
       {
         name: 'Floating Island',
         link: gamesUrls.floating_island,
         difficulty: Difficulty.MEDIUM,
+        imgWidth: 5000,
       },
       {
         name: 'Medieval Floating Village',
         link: gamesUrls.medieval_floating_village,
         difficulty: Difficulty.EASY,
+        imgWidth: 4961,
       },
     ],
   });
@@ -242,10 +246,10 @@ async function seedRoundsAndLeaderboard() {
   });
 }
 // omitted for testing
-// seedGames()
-//   .then(() => seedCharacters())
-//   .then(() => seedRoundsAndLeaderboard())
-//   .catch((err) => {
-//     console.error(err);
-//   });
+seedGames()
+  .then(() => seedCharacters())
+  .then(() => seedRoundsAndLeaderboard())
+  .catch((err) => {
+    console.error(err);
+  });
 export { seedCharacters, seedGames, seedRoundsAndLeaderboard };

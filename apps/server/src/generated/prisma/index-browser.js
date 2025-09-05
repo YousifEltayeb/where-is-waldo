@@ -124,7 +124,8 @@ exports.Prisma.GameScalarFieldEnum = {
   id: 'id',
   name: 'name',
   link: 'link',
-  difficulty: 'difficulty'
+  difficulty: 'difficulty',
+  imgWidth: 'imgWidth'
 };
 
 exports.Prisma.CharacterScalarFieldEnum = {

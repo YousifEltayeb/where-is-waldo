@@ -21,6 +21,7 @@ model Game {
   difficulty Difficulty  @default(EASY)
   Characters Character[]
   Rounds     Round[]
+  imgWidth   Int
 
   @@map("games")
 }

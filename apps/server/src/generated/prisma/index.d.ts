@@ -1200,10 +1200,12 @@ export namespace Prisma {
 
   export type GameAvgAggregateOutputType = {
     id: number | null
+    imgWidth: number | null
   }
 
   export type GameSumAggregateOutputType = {
     id: number | null
+    imgWidth: number | null
   }
 
   export type GameMinAggregateOutputType = {
@@ -1211,6 +1213,7 @@ export namespace Prisma {
     name: string | null
     link: string | null
     difficulty: $Enums.Difficulty | null
+    imgWidth: number | null
   }
 
   export type GameMaxAggregateOutputType = {
@@ -1218,6 +1221,7 @@ export namespace Prisma {
     name: string | null
     link: string | null
     difficulty: $Enums.Difficulty | null
+    imgWidth: number | null
   }
 
   export type GameCountAggregateOutputType = {
@@ -1225,16 +1229,19 @@ export namespace Prisma {
     name: number
     link: number
     difficulty: number
+    imgWidth: number
     _all: number
   }
 
 
   export type GameAvgAggregateInputType = {
     id?: true
+    imgWidth?: true
   }
 
   export type GameSumAggregateInputType = {
     id?: true
+    imgWidth?: true
   }
 
   export type GameMinAggregateInputType = {
@@ -1242,6 +1249,7 @@ export namespace Prisma {
     name?: true
     link?: true
     difficulty?: true
+    imgWidth?: true
   }
 
   export type GameMaxAggregateInputType = {
@@ -1249,6 +1257,7 @@ export namespace Prisma {
     name?: true
     link?: true
     difficulty?: true
+    imgWidth?: true
   }
 
   export type GameCountAggregateInputType = {
@@ -1256,6 +1265,7 @@ export namespace Prisma {
     name?: true
     link?: true
     difficulty?: true
+    imgWidth?: true
     _all?: true
   }
 
@@ -1350,6 +1360,7 @@ export namespace Prisma {
     name: string
     link: string
     difficulty: $Enums.Difficulty
+    imgWidth: number
     _count: GameCountAggregateOutputType | null
     _avg: GameAvgAggregateOutputType | null
     _sum: GameSumAggregateOutputType | null
@@ -1376,6 +1387,7 @@ export namespace Prisma {
     name?: boolean
     link?: boolean
     difficulty?: boolean
+    imgWidth?: boolean
     Characters?: boolean | Game$CharactersArgs<ExtArgs>
     Rounds?: boolean | Game$RoundsArgs<ExtArgs>
     _count?: boolean | GameCountOutputTypeDefaultArgs<ExtArgs>
@@ -1386,6 +1398,7 @@ export namespace Prisma {
     name?: boolean
     link?: boolean
     difficulty?: boolean
+    imgWidth?: boolean
   }, ExtArgs["result"]["game"]>
 
   export type GameSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1393,6 +1406,7 @@ export namespace Prisma {
     name?: boolean
     link?: boolean
     difficulty?: boolean
+    imgWidth?: boolean
   }, ExtArgs["result"]["game"]>
 
   export type GameSelectScalar = {
@@ -1400,9 +1414,10 @@ export namespace Prisma {
     name?: boolean
     link?: boolean
     difficulty?: boolean
+    imgWidth?: boolean
   }
 
-  export type GameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "link" | "difficulty", ExtArgs["result"]["game"]>
+  export type GameOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "link" | "difficulty" | "imgWidth", ExtArgs["result"]["game"]>
   export type GameInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Characters?: boolean | Game$CharactersArgs<ExtArgs>
     Rounds?: boolean | Game$RoundsArgs<ExtArgs>
@@ -1422,6 +1437,7 @@ export namespace Prisma {
       name: string
       link: string
       difficulty: $Enums.Difficulty
+      imgWidth: number
     }, ExtArgs["result"]["game"]>
     composites: {}
   }
@@ -1851,6 +1867,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Game", 'String'>
     readonly link: FieldRef<"Game", 'String'>
     readonly difficulty: FieldRef<"Game", 'Difficulty'>
+    readonly imgWidth: FieldRef<"Game", 'Int'>
   }
     
 
@@ -5691,7 +5708,8 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     link: 'link',
-    difficulty: 'difficulty'
+    difficulty: 'difficulty',
+    imgWidth: 'imgWidth'
   };
 
   export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
@@ -5842,6 +5860,7 @@ export namespace Prisma {
     name?: StringFilter<"Game"> | string
     link?: StringFilter<"Game"> | string
     difficulty?: EnumDifficultyFilter<"Game"> | $Enums.Difficulty
+    imgWidth?: IntFilter<"Game"> | number
     Characters?: CharacterListRelationFilter
     Rounds?: RoundListRelationFilter
   }
@@ -5851,6 +5870,7 @@ export namespace Prisma {
     name?: SortOrder
     link?: SortOrder
     difficulty?: SortOrder
+    imgWidth?: SortOrder
     Characters?: CharacterOrderByRelationAggregateInput
     Rounds?: RoundOrderByRelationAggregateInput
   }
@@ -5863,6 +5883,7 @@ export namespace Prisma {
     OR?: GameWhereInput[]
     NOT?: GameWhereInput | GameWhereInput[]
     difficulty?: EnumDifficultyFilter<"Game"> | $Enums.Difficulty
+    imgWidth?: IntFilter<"Game"> | number
     Characters?: CharacterListRelationFilter
     Rounds?: RoundListRelationFilter
   }, "id" | "name" | "link">
@@ -5872,6 +5893,7 @@ export namespace Prisma {
     name?: SortOrder
     link?: SortOrder
     difficulty?: SortOrder
+    imgWidth?: SortOrder
     _count?: GameCountOrderByAggregateInput
     _avg?: GameAvgOrderByAggregateInput
     _max?: GameMaxOrderByAggregateInput
@@ -5887,6 +5909,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Game"> | string
     link?: StringWithAggregatesFilter<"Game"> | string
     difficulty?: EnumDifficultyWithAggregatesFilter<"Game"> | $Enums.Difficulty
+    imgWidth?: IntWithAggregatesFilter<"Game"> | number
   }
 
   export type CharacterWhereInput = {
@@ -6077,6 +6100,7 @@ export namespace Prisma {
     name: string
     link: string
     difficulty?: $Enums.Difficulty
+    imgWidth: number
     Characters?: CharacterCreateNestedManyWithoutGameInput
     Rounds?: RoundCreateNestedManyWithoutGameInput
   }
@@ -6086,6 +6110,7 @@ export namespace Prisma {
     name: string
     link: string
     difficulty?: $Enums.Difficulty
+    imgWidth: number
     Characters?: CharacterUncheckedCreateNestedManyWithoutGameInput
     Rounds?: RoundUncheckedCreateNestedManyWithoutGameInput
   }
@@ -6094,6 +6119,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    imgWidth?: IntFieldUpdateOperationsInput | number
     Characters?: CharacterUpdateManyWithoutGameNestedInput
     Rounds?: RoundUpdateManyWithoutGameNestedInput
   }
@@ -6103,6 +6129,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    imgWidth?: IntFieldUpdateOperationsInput | number
     Characters?: CharacterUncheckedUpdateManyWithoutGameNestedInput
     Rounds?: RoundUncheckedUpdateManyWithoutGameNestedInput
   }
@@ -6112,12 +6139,14 @@ export namespace Prisma {
     name: string
     link: string
     difficulty?: $Enums.Difficulty
+    imgWidth: number
   }
 
   export type GameUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    imgWidth?: IntFieldUpdateOperationsInput | number
   }
 
   export type GameUncheckedUpdateManyInput = {
@@ -6125,6 +6154,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    imgWidth?: IntFieldUpdateOperationsInput | number
   }
 
   export type CharacterCreateInput = {
@@ -6362,10 +6392,12 @@ export namespace Prisma {
     name?: SortOrder
     link?: SortOrder
     difficulty?: SortOrder
+    imgWidth?: SortOrder
   }
 
   export type GameAvgOrderByAggregateInput = {
     id?: SortOrder
+    imgWidth?: SortOrder
   }
 
   export type GameMaxOrderByAggregateInput = {
@@ -6373,6 +6405,7 @@ export namespace Prisma {
     name?: SortOrder
     link?: SortOrder
     difficulty?: SortOrder
+    imgWidth?: SortOrder
   }
 
   export type GameMinOrderByAggregateInput = {
@@ -6380,10 +6413,12 @@ export namespace Prisma {
     name?: SortOrder
     link?: SortOrder
     difficulty?: SortOrder
+    imgWidth?: SortOrder
   }
 
   export type GameSumOrderByAggregateInput = {
     id?: SortOrder
+    imgWidth?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -6723,6 +6758,14 @@ export namespace Prisma {
     set?: $Enums.Difficulty
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type CharacterUpdateManyWithoutGameNestedInput = {
     create?: XOR<CharacterCreateWithoutGameInput, CharacterUncheckedCreateWithoutGameInput> | CharacterCreateWithoutGameInput[] | CharacterUncheckedCreateWithoutGameInput[]
     connectOrCreate?: CharacterCreateOrConnectWithoutGameInput | CharacterCreateOrConnectWithoutGameInput[]
@@ -6749,14 +6792,6 @@ export namespace Prisma {
     update?: RoundUpdateWithWhereUniqueWithoutGameInput | RoundUpdateWithWhereUniqueWithoutGameInput[]
     updateMany?: RoundUpdateManyWithWhereWithoutGameInput | RoundUpdateManyWithWhereWithoutGameInput[]
     deleteMany?: RoundScalarWhereInput | RoundScalarWhereInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type CharacterUncheckedUpdateManyWithoutGameNestedInput = {
@@ -7213,6 +7248,7 @@ export namespace Prisma {
     name: string
     link: string
     difficulty?: $Enums.Difficulty
+    imgWidth: number
     Rounds?: RoundCreateNestedManyWithoutGameInput
   }
 
@@ -7221,6 +7257,7 @@ export namespace Prisma {
     name: string
     link: string
     difficulty?: $Enums.Difficulty
+    imgWidth: number
     Rounds?: RoundUncheckedCreateNestedManyWithoutGameInput
   }
 
@@ -7244,6 +7281,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    imgWidth?: IntFieldUpdateOperationsInput | number
     Rounds?: RoundUpdateManyWithoutGameNestedInput
   }
 
@@ -7252,6 +7290,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    imgWidth?: IntFieldUpdateOperationsInput | number
     Rounds?: RoundUncheckedUpdateManyWithoutGameNestedInput
   }
 
@@ -7259,6 +7298,7 @@ export namespace Prisma {
     name: string
     link: string
     difficulty?: $Enums.Difficulty
+    imgWidth: number
     Characters?: CharacterCreateNestedManyWithoutGameInput
   }
 
@@ -7267,6 +7307,7 @@ export namespace Prisma {
     name: string
     link: string
     difficulty?: $Enums.Difficulty
+    imgWidth: number
     Characters?: CharacterUncheckedCreateNestedManyWithoutGameInput
   }
 
@@ -7306,6 +7347,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    imgWidth?: IntFieldUpdateOperationsInput | number
     Characters?: CharacterUpdateManyWithoutGameNestedInput
   }
 
@@ -7314,6 +7356,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    imgWidth?: IntFieldUpdateOperationsInput | number
     Characters?: CharacterUncheckedUpdateManyWithoutGameNestedInput
   }
 

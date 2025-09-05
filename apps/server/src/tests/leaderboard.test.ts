@@ -17,9 +17,7 @@ describe('/leaderboard', function () {
   }
 
   beforeEach(async () => {
-    const game = await prisma.game.create({
-      data: { name: 'Test Game', link: 'test-game-link' },
-    });
+    const game = await prisma.game.findFirstOrThrow();
     const round = await prisma.round.create({
       data: { gameId: game.id, end: new Date(), hits: [1, 2, 3] },
     });

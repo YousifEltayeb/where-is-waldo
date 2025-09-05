@@ -22,6 +22,7 @@ describe('/games', function () {
         link: expect.any(String),
         difficulty: expect.any(String),
         Characters: expect.any(Array),
+        imgWidth: expect.any(Number),
       });
     });
   });

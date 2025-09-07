@@ -1,17 +1,24 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import { useEffect, useState } from 'react';
-import { useQuery, useMutation, QueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import Characters from './Characters';
+import Hitbox from './Hitbox';
+import { useState, useEffect } from 'react';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { useParams } from 'react-router';
+import { StyledEngineProvider } from '@mui/material/styles';
+import Alert from '@/components/ui/alert';
+import Dialog from './Dialog';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
-
-const queryClient = new QueryClient();
 export default function Game() {
   const [realXPos, setRealXPos] = useState(0);
   const [realYPos, setRealYPos] = useState(0);
   const [onScreenXPos, setOnScreenXPos] = useState(0);
   const [onScreenYPos, setOnScreenYPos] = useState(0);
   const [displayBox, setDisplayBox] = useState('none');
+  const [showHitAlert, setShowHitAlert] = useState('none');
+  const [showMissAlert, setShowMissAlert] = useState('none');
+  const [roundOver, setRoundOver] = useState(false);
+  const navigate = useNavigate();
 
   const { gameName } = useParams();
 
@@ -23,26 +30,23 @@ export default function Game() {
         mode: 'cors',
       }).then((res) => res.json()),
   });
+  useEffect(() => {
+    if (showHitAlert === 'block') {
+      const toRef = setTimeout(() => {
+        setShowHitAlert('none');
+        clearTimeout(toRef);
+      }, 2000);
+    }
+  }, [showHitAlert]);
 
-  const hitRequest = useMutation({
-    mutationFn: (hitObj: { charId: string; xPos: string; yPos: string }) =>
-      fetch(SERVER_URL + '/rounds', {
-        method: 'PATCH',
-        mode: 'cors',
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-        body: new URLSearchParams({
-          characterId: hitObj.charId,
-          xCoordinate: hitObj.xPos,
-          yCoordinate: hitObj.yPos,
-        }),
-      }).then((res) => res.json()),
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => console.error(error),
-  });
+  useEffect(() => {
+    if (showMissAlert === 'block') {
+      const toRef = setTimeout(() => {
+        setShowMissAlert('none');
+        clearTimeout(toRef);
+      }, 2000);
+    }
+  }, [showMissAlert]);
   const tokenRequest = useMutation({
     mutationFn: (gameId: string) =>
       fetch(SERVER_URL + '/rounds', {
@@ -54,6 +58,7 @@ export default function Game() {
     onSuccess: (data) => {
       localStorage.setItem('token', data);
     },
+    onError: (error) => console.error(error),
   });
 
   if (gamesQuery.isPending) return 'Loading...';
@@ -80,33 +85,14 @@ export default function Game() {
     setDisplayBox(displayBox === 'none' ? 'block' : 'none');
   };
 
-  const hit = (charId: string) => {
-    hitRequest.mutate({
-      charId,
-      xPos: String(realXPos),
-      yPos: String(realYPos),
-    });
-  };
   return (
     <main>
+      <StyledEngineProvider injectFirst>
+        <Alert showMissAlert={showMissAlert} showHitAlert={showHitAlert} />
+      </StyledEngineProvider>
+      <Dialog setRoundOver={setRoundOver} roundOver={roundOver} />
       <h1>Find these characters</h1>
-      <div className="flex justify-center m-5">
-        <ul className="flex gap-5">
-          <li>
-            <span>{game.Characters[0].name}</span>
-            <img src={game.Characters[0].link} alt="" className="w-20" />
-          </li>
-          <li>
-            <span>{game.Characters[1].name}</span>
-            <img src={game.Characters[1].link} alt="" className="w-20" />
-          </li>
-
-          <li>
-            <span>{game.Characters[2].name}</span>
-            <img src={game.Characters[2].link} alt="" className="w-20" />
-          </li>
-        </ul>
-      </div>
+      <Characters characters={game.Characters} />
       <div className="w-full relative">
         <img
           className="absolute cursor-crosshair"
@@ -116,34 +102,17 @@ export default function Game() {
           onLoad={() => getToken()}
         />
       </div>
-      <div style={{ display: displayBox }}>
-        <div
-          style={{
-            top: onScreenYPos - 20 + 'px',
-            left: onScreenXPos - 20 + 'px',
-          }}
-          className="absolute w-10 h-10 border-4 border-solid border-red-500"
-        />
-        <div
-          style={{
-            top: onScreenYPos - 20 + 'px',
-            left: onScreenXPos + 20 + 'px',
-          }}
-          className="absolute  h-30 ml-5 "
-        >
-          <ul className="flex flex-col gap-3">
-            <Button onClick={() => hit(game.Characters[0].id)}>
-              {game.Characters[0].name}
-            </Button>
-            <Button onClick={() => hit(game.Characters[1].id)}>
-              {game.Characters[1].name}
-            </Button>
-            <Button onClick={() => hit(game.Characters[2].id)}>
-              {game.Characters[2].name}
-            </Button>
-          </ul>
-        </div>
-      </div>
+      <Hitbox
+        characters={game.Characters}
+        display={displayBox}
+        xPos={onScreenXPos}
+        yPos={onScreenYPos}
+        realXPos={realXPos}
+        realYPos={realYPos}
+        setShowHitAlert={setShowHitAlert}
+        setShowMissAlert={setShowMissAlert}
+        setRoundOver={setRoundOver}
+      />
     </main>
   );
 }

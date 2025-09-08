@@ -10,7 +10,8 @@ export interface GameType {
   name: string;
   id: string;
   link: string;
-  Characters: Chars;
+  Characters: Char[];
+  imgWidth: number;
 }
 interface Position {
   x: number;

@@ -51,7 +51,7 @@ export default function Dialog({ setRoundOver, roundOver }: Props) {
             id="playerNameForm"
           >
             <label htmlFor="name">Name:</label>
-            <input type="text" id="name" />
+            <input type="text" id="name" className="border-white" autoFocus />
           </form>
         </AlertDialogHeader>
         <AlertDialogFooter>

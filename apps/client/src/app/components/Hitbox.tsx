@@ -4,7 +4,8 @@ import { useHitRequest } from '../hooks/useGameAPI';
 
 interface Props {
   characters: Char[];
-  display: boolean;
+  displayHitbox: boolean;
+  toggleHitbox: () => void;
   xPos: number;
   yPos: number;
   realXPos: number;
@@ -15,7 +16,8 @@ interface Props {
 }
 export default function Hitbox({
   characters,
-  display,
+  displayHitbox,
+  toggleHitbox,
   xPos,
   yPos,
   realXPos,
@@ -36,9 +38,10 @@ export default function Hitbox({
       xPos: String(realXPos),
       yPos: String(realYPos),
     });
+    toggleHitbox();
   };
   return (
-    <div style={{ display: display ? 'block' : 'none' }}>
+    <div style={{ display: displayHitbox ? 'block' : 'none' }}>
       <div
         style={{
           top: yPos - 20 + 'px',

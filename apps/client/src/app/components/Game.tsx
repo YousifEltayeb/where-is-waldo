@@ -6,14 +6,14 @@ import { useParams } from 'react-router';
 import { StyledEngineProvider } from '@mui/material/styles';
 import DescriptionAlerts from '@/components/ui/alert';
 import Dialog from './Dialog';
-import { GameType } from '../types';
-import { useGamesQuery, useRoundRequest } from '../hooks/useGameAPI';
+import { useRoundRequest } from '../hooks/useGameAPI';
 import { usePosition } from '../hooks/usePosition';
 import { useAlerts } from '../hooks/useAlerts';
+import { useGameByName } from '../hooks/useGameByName';
 
 export default function Game() {
   const [roundOver, setRoundOver] = useState(false);
-
+  const { showHitAlert, showMissAlert, showHit, showMiss } = useAlerts();
   const {
     realPosition,
     screenPosition,
@@ -21,19 +21,15 @@ export default function Game() {
     updatePosition,
     toggleHitbox,
   } = usePosition();
-
-  const { showHitAlert, showMissAlert, showHit, showMiss } = useAlerts();
-
   const { gameName } = useParams();
-
-  const gamesQuery = useGamesQuery();
+  const { game, isLoading, error } = useGameByName(gameName);
   const tokenRequest = useRoundRequest();
 
-  if (gamesQuery.isPending)
+  if (isLoading)
     return <Skeleton className="h-[20px] w-[100px] rounded-full" />;
-  if (gamesQuery.error) return <span>{gamesQuery.error.message}</span>;
+  if (error) return <span>{error.message}</span>;
+  if (!game) return <span>Game not found</span>;
 
-  const game = gamesQuery.data.find((game: GameType) => game.name === gameName);
   const getToken = () => {
     tokenRequest.mutate(game.id);
   };
@@ -64,7 +60,8 @@ export default function Game() {
       </div>
       <Hitbox
         characters={game.Characters}
-        display={isHitboxVisible}
+        displayHitbox={isHitboxVisible}
+        toggleHitbox={toggleHitbox}
         xPos={screenPosition.x}
         yPos={screenPosition.y}
         realXPos={realPosition.x}

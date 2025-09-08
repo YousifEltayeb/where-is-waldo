@@ -12,3 +12,18 @@ export interface GameType {
   link: string;
   Characters: Chars;
 }
+interface Position {
+  x: number;
+  y: number;
+}
+
+export interface UsePositionReturnType {
+  realPosition: Position;
+  screenPosition: Position;
+  isHitboxVisible: boolean;
+  updatePosition: (
+    event: React.MouseEvent<HTMLImageElement>,
+    imgWidth: number
+  ) => void;
+  toggleHitbox: () => void;
+}

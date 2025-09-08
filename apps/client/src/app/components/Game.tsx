@@ -1,66 +1,33 @@
-'use client';
 import Characters from './Characters';
 import Hitbox from './Hitbox';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useParams } from 'react-router';
 import { StyledEngineProvider } from '@mui/material/styles';
-import Alert from '@/components/ui/alert';
+import DescriptionAlerts from '@/components/ui/alert';
 import Dialog from './Dialog';
 import { GameType } from '../types';
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+import { useGamesQuery, useRoundRequest } from '../hooks/useGameAPI';
+import { usePosition } from '../hooks/usePosition';
+import { useAlerts } from '../hooks/useAlerts';
 
 export default function Game() {
-  const [realXPos, setRealXPos] = useState(0);
-  const [realYPos, setRealYPos] = useState(0);
-  const [onScreenXPos, setOnScreenXPos] = useState(0);
-  const [onScreenYPos, setOnScreenYPos] = useState(0);
-  const [displayBox, setDisplayBox] = useState('none');
-  const [showHitAlert, setShowHitAlert] = useState('none');
-  const [showMissAlert, setShowMissAlert] = useState('none');
   const [roundOver, setRoundOver] = useState(false);
+
+  const {
+    realPosition,
+    screenPosition,
+    isHitboxVisible,
+    updatePosition,
+    toggleHitbox,
+  } = usePosition();
+
+  const { showHitAlert, showMissAlert, showHit, showMiss } = useAlerts();
 
   const { gameName } = useParams();
 
-  const gamesQuery = useQuery({
-    queryKey: ['games'],
-    queryFn: () =>
-      fetch(SERVER_URL + '/games', {
-        method: 'GET',
-        mode: 'cors',
-      }).then((res) => res.json()),
-  });
-  useEffect(() => {
-    if (showHitAlert === 'block') {
-      const toRef = setTimeout(() => {
-        setShowHitAlert('none');
-        clearTimeout(toRef);
-      }, 2000);
-    }
-  }, [showHitAlert]);
-
-  useEffect(() => {
-    if (showMissAlert === 'block') {
-      const toRef = setTimeout(() => {
-        setShowMissAlert('none');
-        clearTimeout(toRef);
-      }, 2000);
-    }
-  }, [showMissAlert]);
-  const tokenRequest = useMutation({
-    mutationFn: (gameId: string) =>
-      fetch(SERVER_URL + '/rounds', {
-        method: 'POST',
-        mode: 'cors',
-        body: new URLSearchParams({ gameId }),
-      }).then((res) => res.json()),
-
-    onSuccess: (data) => {
-      localStorage.setItem('token', data);
-    },
-    onError: (error) => console.error(error),
-  });
+  const gamesQuery = useGamesQuery();
+  const tokenRequest = useRoundRequest();
 
   if (gamesQuery.isPending)
     return <Skeleton className="h-[20px] w-[100px] rounded-full" />;
@@ -71,26 +38,17 @@ export default function Game() {
     tokenRequest.mutate(game.id);
   };
   const mark = (e: React.MouseEvent<HTMLImageElement>) => {
-    const normalizedXPos = Math.round(
-      (e.nativeEvent.offsetX / e.currentTarget.width) * game.imgWidth
-    );
-    const normalizedYPos = Math.round(
-      (e.nativeEvent.offsetY / e.currentTarget.width) * game.imgWidth
-    );
-
-    setOnScreenXPos(e.pageX);
-    setOnScreenYPos(e.pageY);
-
-    setRealXPos(normalizedXPos);
-    setRealYPos(normalizedYPos);
-
-    setDisplayBox(displayBox === 'none' ? 'block' : 'none');
+    updatePosition(e, game.imgWidth);
+    toggleHitbox();
   };
 
   return (
     <main>
       <StyledEngineProvider injectFirst>
-        <Alert showMissAlert={showMissAlert} showHitAlert={showHitAlert} />
+        <DescriptionAlerts
+          showHitAlert={showHitAlert}
+          showMissAlert={showMissAlert}
+        />
       </StyledEngineProvider>
       <Dialog setRoundOver={setRoundOver} roundOver={roundOver} />
       <h1>Find these characters</h1>
@@ -106,14 +64,14 @@ export default function Game() {
       </div>
       <Hitbox
         characters={game.Characters}
-        display={displayBox}
-        xPos={onScreenXPos}
-        yPos={onScreenYPos}
-        realXPos={realXPos}
-        realYPos={realYPos}
-        setShowHitAlert={setShowHitAlert}
-        setShowMissAlert={setShowMissAlert}
+        display={isHitboxVisible}
+        xPos={screenPosition.x}
+        yPos={screenPosition.y}
+        realXPos={realPosition.x}
+        realYPos={realPosition.y}
         setRoundOver={setRoundOver}
+        showHit={showHit}
+        showMiss={showMiss}
       />
     </main>
   );

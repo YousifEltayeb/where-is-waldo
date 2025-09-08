@@ -1,18 +1,17 @@
 import { Char } from '../types';
 import { Button } from '@/components/ui/button';
-import { useMutation } from '@tanstack/react-query';
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+import { useHitRequest } from '../hooks/useGameAPI';
 
 interface Props {
   characters: Char[];
-  display: string;
+  display: boolean;
   xPos: number;
   yPos: number;
   realXPos: number;
   realYPos: number;
-  setShowHitAlert: React.Dispatch<React.SetStateAction<string>>;
-  setShowMissAlert: React.Dispatch<React.SetStateAction<string>>;
   setRoundOver: React.Dispatch<React.SetStateAction<boolean>>;
+  showHit: () => void;
+  showMiss: () => void;
 }
 export default function Hitbox({
   characters,
@@ -21,41 +20,16 @@ export default function Hitbox({
   yPos,
   realXPos,
   realYPos,
-  setShowHitAlert,
-  setShowMissAlert,
   setRoundOver,
+  showHit,
+  showMiss,
 }: Props) {
-  const hitRequest = useMutation({
-    mutationFn: (hitObj: { charId: string; xPos: string; yPos: string }) => {
-      console.log(localStorage.getItem('token'));
-
-      return fetch(SERVER_URL + '/rounds', {
-        method: 'PATCH',
-        mode: 'cors',
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-        body: new URLSearchParams({
-          characterId: hitObj.charId,
-          xCoordinate: hitObj.xPos,
-          yCoordinate: hitObj.yPos,
-        }),
-      });
-    },
-    onSuccess: (response) => {
-      if (response.status !== 201) {
-        setShowMissAlert('block');
-        console.log(response.json());
-      } else {
-        response.json().then((data) => {
-          if (data.roundOver) setRoundOver(true);
-          console.log(data.roundOver);
-        });
-        setShowHitAlert('block');
-      }
-    },
-    onError: (error) => console.error(error),
+  const hitRequest = useHitRequest({
+    setRoundOver,
+    showHit,
+    showMiss,
   });
+
   const hit = (charId: string) => {
     hitRequest.mutate({
       charId,
@@ -64,7 +38,7 @@ export default function Hitbox({
     });
   };
   return (
-    <div style={{ display: display }}>
+    <div style={{ display: display ? 'block' : 'none' }}>
       <div
         style={{
           top: yPos - 20 + 'px',

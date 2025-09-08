@@ -1,14 +1,16 @@
 'use client';
-import { useNavigate } from 'react-router-dom';
 import Characters from './Characters';
 import Hitbox from './Hitbox';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useParams } from 'react-router';
 import { StyledEngineProvider } from '@mui/material/styles';
 import Alert from '@/components/ui/alert';
 import Dialog from './Dialog';
+import { GameType } from '../types';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 export default function Game() {
   const [realXPos, setRealXPos] = useState(0);
   const [realYPos, setRealYPos] = useState(0);
@@ -18,7 +20,6 @@ export default function Game() {
   const [showHitAlert, setShowHitAlert] = useState('none');
   const [showMissAlert, setShowMissAlert] = useState('none');
   const [roundOver, setRoundOver] = useState(false);
-  const navigate = useNavigate();
 
   const { gameName } = useParams();
 
@@ -61,19 +62,20 @@ export default function Game() {
     onError: (error) => console.error(error),
   });
 
-  if (gamesQuery.isPending) return 'Loading...';
-  if (gamesQuery.error) return 'Error';
+  if (gamesQuery.isPending)
+    return <Skeleton className="h-[20px] w-[100px] rounded-full" />;
+  if (gamesQuery.error) return <span>{gamesQuery.error.message}</span>;
 
-  const game = gamesQuery.data.find((game: any) => game.name === gameName);
+  const game = gamesQuery.data.find((game: GameType) => game.name === gameName);
   const getToken = () => {
     tokenRequest.mutate(game.id);
   };
-  const mark = (e: any) => {
+  const mark = (e: React.MouseEvent<HTMLImageElement>) => {
     const normalizedXPos = Math.round(
-      (e.nativeEvent.offsetX / e.target.width) * game.imgWidth
+      (e.nativeEvent.offsetX / e.currentTarget.width) * game.imgWidth
     );
     const normalizedYPos = Math.round(
-      (e.nativeEvent.offsetY / e.target.width) * game.imgWidth
+      (e.nativeEvent.offsetY / e.currentTarget.width) * game.imgWidth
     );
 
     setOnScreenXPos(e.pageX);

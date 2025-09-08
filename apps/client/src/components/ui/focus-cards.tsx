@@ -49,6 +49,7 @@ type Card = {
   title: string;
   src: string;
   id: number;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function FocusCards({ cards }: { cards: Card[] }) {

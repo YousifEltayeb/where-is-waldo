@@ -40,7 +40,10 @@ export const validateUpdatePlayerName = async (
   } catch (error) {
     if (error instanceof z.ZodError) {
       return res.status(400).json(error.issues);
-    } else return res.status(500).json({ message: 'unxpected server error' });
+    } else {
+      console.error(error);
+      return res.status(500).json({ message: 'unxpected server error' });
+    }
   }
 };
 export const updatePlayerName = [

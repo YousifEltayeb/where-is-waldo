@@ -1,5 +1,6 @@
 import { FocusCards } from '@/components/ui/focus-cards';
 import { useQuery } from '@tanstack/react-query';
+import { Skeleton } from '@/components/ui/skeleton';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export default function Home() {
@@ -12,8 +13,9 @@ export default function Home() {
       }).then((res) => res.json()),
   });
 
-  if (gamesQuery.isPending) return 'Loading...';
-  if (gamesQuery.error) return 'Error';
+  if (gamesQuery.isPending)
+    return <Skeleton className="h-[20px] w-[100px] rounded-full" />;
+  if (gamesQuery.error) return <span>{gamesQuery.error.message}</span>;
 
   return (
     <main className="flex flex-col justify-center items-center ">

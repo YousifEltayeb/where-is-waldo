@@ -13,6 +13,14 @@ interface Props {
   setRoundOver: React.Dispatch<React.SetStateAction<boolean>>;
   showHit: () => void;
   showMiss: () => void;
+  setHitCoordinates?: React.Dispatch<
+    React.SetStateAction<{
+      xStart: number;
+      xEnd: number;
+      yStart: number;
+      yEnd: number;
+    }[]>
+  >;
 }
 export default function Hitbox({
   characters,
@@ -25,11 +33,13 @@ export default function Hitbox({
   setRoundOver,
   showHit,
   showMiss,
+  setHitCoordinates,
 }: Props) {
   const hitRequest = useHitRequest({
     setRoundOver,
     showHit,
     showMiss,
+    setHitCoordinates,
   });
 
   const hit = (charId: string) => {

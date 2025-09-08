@@ -1,10 +1,18 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 
 import { fetchGames, createRound, createHit } from '../services/gameServices';
+
+interface Coords {
+  xStart: number;
+  xEnd: number;
+  yStart: number;
+  yEnd: number;
+}
 interface HitPropsType {
   setRoundOver: React.Dispatch<React.SetStateAction<boolean>>;
   showHit: () => void;
   showMiss: () => void;
+  setHitCoordinates?: React.Dispatch<React.SetStateAction<Coords[]>>;
 }
 export const useGamesQuery = () =>
   useQuery({
@@ -24,25 +32,38 @@ export const useRoundRequest = () =>
     onError: (error) => console.error(error),
   });
 
-export const useHitRequest = ({ setRoundOver, showHit, showMiss }: HitPropsType) => {
+export const useHitRequest = ({
+  setRoundOver,
+  showHit,
+  showMiss,
+  setHitCoordinates,
+}: HitPropsType) => {
   return useMutation({
     mutationFn: (hitObj: { charId: string; xPos: string; yPos: string }) =>
       createHit(hitObj),
     onSuccess: async (response) => {
       if (response.status !== 201) {
         showMiss();
-        try {
-          const data = await response.json();
-          console.log(data);
-        } catch (error) {
-          console.error('Error parsing response:', error);
-        }
       } else {
+        const data = await response.json();
+        console.log(data);
+
         showHit();
         try {
-          const data = await response.json();
+          // If the server returns coordinates for a successful hit, set them
+          if (data.xStart && setHitCoordinates) {
+            setHitCoordinates((prev) => [
+              ...prev,
+              {
+                xStart: data.xStart,
+                xEnd: data.xEnd,
+                yStart: data.yStart,
+                yEnd: data.yEnd,
+              },
+            ]);
+          }
+
           if (data.roundOver) setRoundOver(true);
-          console.log(data.roundOver);
         } catch (error) {
           console.error('Error parsing response:', error);
         }

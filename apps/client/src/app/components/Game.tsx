@@ -1,7 +1,8 @@
 import Characters from './Characters';
 import Hitbox from './Hitbox';
+import MarkHit from './MarkHit';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useParams } from 'react-router';
 import { StyledEngineProvider } from '@mui/material/styles';
 import DescriptionAlerts from '@/components/ui/alert';
@@ -11,8 +12,17 @@ import { usePosition } from '../hooks/usePosition';
 import { useAlerts } from '../hooks/useAlerts';
 import { useGameByName } from '../hooks/useGameByName';
 
+interface Coords {
+  xStart: number;
+  xEnd: number;
+  yStart: number;
+  yEnd: number;
+}
+
 export default function Game() {
   const [roundOver, setRoundOver] = useState(false);
+  const [hitCoordinates, setHitCoordinates] = useState<Coords[]>([]);
+  const imageRef = useRef<HTMLImageElement | null>(null);
   const { showHitAlert, showMissAlert, showHit, showMiss } = useAlerts();
   const {
     realPosition,
@@ -51,12 +61,24 @@ export default function Game() {
       <Characters characters={game.Characters} />
       <div className="w-full relative">
         <img
+          ref={imageRef}
           className="absolute cursor-crosshair"
           src={game.link}
           alt=""
           onClick={mark}
           onLoad={() => getToken()}
         />
+        {hitCoordinates.map((coords, index) => (
+          <MarkHit
+            key={index}
+            xStart={coords.xStart}
+            xEnd={coords.xEnd}
+            yStart={coords.yStart}
+            yEnd={coords.yEnd}
+            imageRef={imageRef}
+            originalImageWidth={game.imgWidth}
+          />
+        ))}
       </div>
       <Hitbox
         characters={game.Characters}
@@ -69,7 +91,9 @@ export default function Game() {
         setRoundOver={setRoundOver}
         showHit={showHit}
         showMiss={showMiss}
+        setHitCoordinates={setHitCoordinates}
       />
     </main>
   );
 }
+

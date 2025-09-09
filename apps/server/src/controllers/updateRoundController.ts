@@ -79,6 +79,7 @@ const checkHit = async (req: CheckHitRequestType, res: Response) => {
       if (character?.yStart < yCoordinate && yCoordinate < character?.yEnd) {
         // if hit is successfull
         // update the round with the data
+        let score;
         const updatedRound = await prisma.round.update({
           where: { id: round.id },
           data: {
@@ -89,14 +90,17 @@ const checkHit = async (req: CheckHitRequestType, res: Response) => {
         });
         // check if this hit ended the game
         if (updatedRound.hits.length === 3) {
-          await handleEndGame(updatedRound);
+          score = await handleEndGame(updatedRound);
         }
         return res.status(201).json({
           xStart: character.xStart,
           xEnd: character.xEnd,
           yStart: character.yStart,
           yEnd: character.yEnd,
-          roundOver: updatedRound.hits.length === 3 ? true : false,
+          roundStatus: {
+            isRoundOver: updatedRound.hits.length === 3 ? true : false,
+            seconds: updatedRound.hits.length === 3 ? score : -1,
+          },
         });
       }
     }
@@ -118,8 +122,9 @@ async function handleEndGame(round: Round) {
       },
     });
     // update leaderboard
+    let score;
     if (updatedRound.end) {
-      const score =
+      score =
         (+new Date(updatedRound.end) - +new Date(updatedRound.start)) / 1000;
       await tx.leaderboard.create({
         data: {
@@ -128,6 +133,7 @@ async function handleEndGame(round: Round) {
         },
       });
     }
+    return score;
   });
 }
 export const updateRoundMiddleware = [

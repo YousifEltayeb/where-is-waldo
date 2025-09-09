@@ -1,18 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
 import { columns } from './columns';
 import { Skeleton } from '@/components/ui/skeleton';
 import { DataTable } from './data-table';
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+import { useLeaderboardQuery } from '../hooks/useGameAPI';
 
 export default function DemoPage() {
-  const leaderboard = useQuery({
-    queryKey: ['leaderboard'],
-    queryFn: () =>
-      fetch(SERVER_URL + '/leaderboard', {
-        method: 'GET',
-        mode: 'cors',
-      }).then((res) => res.json()),
-  });
+  const leaderboard = useLeaderboardQuery();
 
   if (leaderboard.isPending)
     return <Skeleton className="h-[20px] w-[100px] rounded-full" />;

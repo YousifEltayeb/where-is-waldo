@@ -1,6 +1,11 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 
-import { fetchGames, createRound, createHit } from '../services/gameServices';
+import {
+  fetchGames,
+  createRound,
+  createHit,
+  fetchLeaderboard,
+} from '../services/gameServices';
 
 interface Coords {
   xStart: number;
@@ -20,6 +25,11 @@ export const useGamesQuery = () =>
     queryFn: fetchGames,
   });
 
+export const useLeaderboardQuery = () =>
+  useQuery({
+    queryKey: ['leaderboard'],
+    queryFn: fetchLeaderboard,
+  });
 export const useRoundRequest = () =>
   useMutation({
     mutationFn: (gameId: string) => createRound(gameId),
@@ -31,7 +41,6 @@ export const useRoundRequest = () =>
     },
     onError: (error) => console.error(error),
   });
-
 export const useHitRequest = ({
   setRoundOver,
   showHit,
@@ -72,3 +81,4 @@ export const useHitRequest = ({
     onError: (error) => console.error(error),
   });
 };
+

@@ -6,6 +6,12 @@ export const fetchGames = () =>
     mode: 'cors',
   }).then((res) => res.json());
 
+export const fetchLeaderboard = () =>
+  fetch(SERVER_URL + '/leaderboard', {
+    method: 'GET',
+    mode: 'cors',
+  }).then((res) => res.json());
+
 export const createRound = (gameId: string) =>
   fetch(SERVER_URL + '/rounds', {
     method: 'POST',

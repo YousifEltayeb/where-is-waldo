@@ -121,3 +121,10 @@ To run the test suite for the server:
 ```bash
 nx test server
 ```
+
+## Art Credit
+
+- [cityport](https://www.reddit.com/r/wimmelbilder/comments/d63d6z/city_port/)
+- [rainforest](https://www.reddit.com/r/wimmelbilder/comments/1l2j48s/rainforest_bj%C3%B6rn_feldmann_2020/)
+- [floating-island](https://www.reddit.com/r/wimmelbilder/comments/1ml8v07/floating_island_by_me_2022/)
+- [medieval-floating-village](https://www.reddit.com/r/wimmelbilder/comments/1mvfpm4/medieval_floating_village_by_me/)

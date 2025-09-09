@@ -1,4 +1,4 @@
-export default function Header() {
+export default function Footer() {
   return (
     <footer className="flex justify-center m-auto w-full">
       <a className="flex gap-3" href="https://github.com/YousifEltayeb">

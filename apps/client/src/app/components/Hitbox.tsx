@@ -11,15 +11,18 @@ interface Props {
   realXPos: number;
   realYPos: number;
   setRoundOver: React.Dispatch<React.SetStateAction<boolean>>;
+  setSeconds: React.Dispatch<React.SetStateAction<number>>;
   showHit: () => void;
   showMiss: () => void;
-  setHitCoordinates?: React.Dispatch<
-    React.SetStateAction<{
-      xStart: number;
-      xEnd: number;
-      yStart: number;
-      yEnd: number;
-    }[]>
+  setHitCoordinates: React.Dispatch<
+    React.SetStateAction<
+      {
+        xStart: number;
+        xEnd: number;
+        yStart: number;
+        yEnd: number;
+      }[]
+    >
   >;
 }
 export default function Hitbox({
@@ -34,20 +37,41 @@ export default function Hitbox({
   showHit,
   showMiss,
   setHitCoordinates,
+  setSeconds,
 }: Props) {
-  const hitRequest = useHitRequest({
-    setRoundOver,
-    showHit,
-    showMiss,
-    setHitCoordinates,
-  });
+  const hitRequest = useHitRequest();
 
   const hit = (charId: string) => {
-    hitRequest.mutate({
-      charId,
-      xPos: String(realXPos),
-      yPos: String(realYPos),
-    });
+    hitRequest.mutate(
+      {
+        charId,
+        xPos: String(realXPos),
+        yPos: String(realYPos),
+      },
+      {
+        onSuccess: async (response) => {
+          if (response.status !== 201) {
+            showMiss();
+          } else {
+            showHit();
+            const data = await response.json();
+            if (data.roundStatus.isRoundOver) {
+              setRoundOver(true);
+              setSeconds(data.roundStatus.seconds);
+            }
+            setHitCoordinates((prev) => [
+              ...prev,
+              {
+                xStart: data.xStart,
+                xEnd: data.xEnd,
+                yStart: data.yStart,
+                yEnd: data.yEnd,
+              },
+            ]);
+          }
+        },
+      }
+    );
     toggleHitbox();
   };
   return (

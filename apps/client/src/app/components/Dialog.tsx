@@ -13,9 +13,11 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 interface Props {
   setRoundOver: React.Dispatch<React.SetStateAction<boolean>>;
   roundOver: boolean;
+  seconds: number;
 }
-export default function Dialog({ setRoundOver, roundOver }: Props) {
+export default function Dialog({ setRoundOver, roundOver, seconds }: Props) {
   const navigate = useNavigate();
+  //TODO: turn this into a custom hook
   const setPlayerNameRequest = useMutation({
     mutationFn: (playerName: string) =>
       fetch(SERVER_URL + '/leaderboard', {
@@ -31,6 +33,7 @@ export default function Dialog({ setRoundOver, roundOver }: Props) {
       console.log(response);
     },
   });
+
   return (
     <AlertDialog onOpenChange={setRoundOver} open={roundOver}>
       <AlertDialogContent>
@@ -38,6 +41,8 @@ export default function Dialog({ setRoundOver, roundOver }: Props) {
           <AlertDialogTitle>Congrats! You've won this round!</AlertDialogTitle>
           <AlertDialogDescription>
             Provide your name and see where you rank on the leaderbaord
+            <br />
+            You've completed this round in: {seconds} seconds
           </AlertDialogDescription>
           <form
             onSubmit={(event) => {

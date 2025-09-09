@@ -132,8 +132,8 @@ async function seedCharacters() {
           yEnd: 2606,
         },
         {
-          name: 'Henrietta',
-          link: charUrls.Henrietta,
+          name: 'KFC',
+          link: charUrls.KFC,
           gameId: cityport.id,
           xStart: 1293,
           xEnd: 1330,

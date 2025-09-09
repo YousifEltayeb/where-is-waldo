@@ -21,6 +21,8 @@ interface Coords {
 
 export default function Game() {
   const [roundOver, setRoundOver] = useState(false);
+  const [seconds, setSeconds] = useState(-1);
+
   const [hitCoordinates, setHitCoordinates] = useState<Coords[]>([]);
   const imageRef = useRef<HTMLImageElement | null>(null);
   const { showHitAlert, showMissAlert, showHit, showMiss } = useAlerts();
@@ -56,7 +58,11 @@ export default function Game() {
           showMissAlert={showMissAlert}
         />
       </StyledEngineProvider>
-      <Dialog setRoundOver={setRoundOver} roundOver={roundOver} />
+      <Dialog
+        seconds={seconds}
+        setRoundOver={setRoundOver}
+        roundOver={roundOver}
+      />
       <h1>Find these characters</h1>
       <Characters characters={game.Characters} />
       <div className="w-full relative">
@@ -89,6 +95,7 @@ export default function Game() {
         realXPos={realPosition.x}
         realYPos={realPosition.y}
         setRoundOver={setRoundOver}
+        setSeconds={setSeconds}
         showHit={showHit}
         showMiss={showMiss}
         setHitCoordinates={setHitCoordinates}

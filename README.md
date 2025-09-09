@@ -1,109 +1,123 @@
-# WhereIsWaldo
+# Where's Waldo?
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A full-stack "Where's Waldo?"-style photo tagging game. Find the hidden characters in the images as fast as you can and see how you stack up on the leaderboard!
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+**Live Link:** [Link to deployed application]() <!-- TODO: Add live link -->
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Gameplay
 
-## Generate a library
+- Choose one of the images to start a new game.
+- The characters to find will be displayed at the top of the screen.
+- Click on the image where you think a character is hiding.
+- A small dropdown will appear. Select the name of the character you think you've found.
+- If you're correct, a marker will appear on the image, and the character's portrait will be greyed out.
+- If you're wrong, you'll be notified of your miss.
+- Find all the characters as quickly as possible to get a high score.
+- After the game, you can add your name to the leaderboard to see how you compare with other players.
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+## Tech Stack
+
+This project is a full-stack application built using a modern technology stack, managed as an Nx monorepo.
+
+### Frontend
+
+- **Framework:** React
+- **Language:** TypeScript
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS
+- **Data Fetching:** TanStack Query
+
+### Backend
+
+- **Framework:** Express.js
+- **Language:** TypeScript
+- **Database:** PostgreSQL
+- **ORM:** Prisma
+
+### Testing
+
+- **Framework:** Vitest
+
+## Getting Started
+
+Follow these instructions to get the project up and running on your local machine.
+
+### Prerequisites
+
+- Node.js (v18 or later recommended)
+- npm, yarn, or pnpm
+- A running PostgreSQL database instance
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd where-is-waldo
+    ```
+
+2.  **Install dependencies:**
+    From the root of the project, run:
+    ```bash
+    npm install
+    ```
+    or
+    ```bash
+    yarn install
+    ```
+
+3.  **Set up environment variables:**
+    This project requires environment variables for both the client and the server.
+    -   In `apps/server`, create a `.env` file by copying the example:
+        ```bash
+        cp apps/server/.env.example apps/server/.env
+        ```
+    -   In `apps/client`, create a `.env` file by copying the example:
+        ```bash
+        cp apps/client/.env.example apps/client/.env
+        ```
+    -   Fill in the required values in both `.env` files. You will need to provide your PostgreSQL database connection string.
+
+4.  **Set up the database:**
+    Run the Prisma migrations to set up your database schema:
+    ```bash
+    npx nx prisma migrate dev --name init --schema=apps/server/src/config/schema.prisma
+    ```
+
+### Running the Application
+
+You can run the client and server separately using the Nx CLI.
+
+-   **To start the backend server:**
+    ```bash
+    nx serve server
+    ```
+    The server will typically start on `http://localhost:3000`.
+
+-   **To start the frontend client:**
+    ```bash
+    nx serve client
+    ```
+    The client will typically start on `http://localhost:5173`.
+
+### Building for Production
+
+To create a production-ready build of the applications, you can use the `build` command.
+
+-   **To build the server:**
+    ```bash
+    nx build server
+    ```
+
+-   **To build the client:**
+    ```bash
+    nx build client
+    ```
+    The production-ready assets will be placed in the `dist/` directory.
+
+### Running Tests
+
+To run the test suite for the server:
+```bash
+nx test server
 ```
-
-## Run tasks
-
-To build the library use:
-
-```sh
-npx nx build pkg1
-```
-
-To run any task with Nx use:
-
-```sh
-npx nx <target> <project-name>
-```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
-
-```
-npx nx release
-```
-
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
-```
-
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)

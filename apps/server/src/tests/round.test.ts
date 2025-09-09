@@ -4,6 +4,7 @@ import roundsRouter from '../routes/roundsRouter';
 import request from 'supertest';
 import { prisma, Character } from '../config/prismaClient';
 import { createTestApp, API_VERSION } from './setup';
+import { boolean } from 'zod';
 
 const app = createTestApp(roundsRouter);
 
@@ -44,7 +45,10 @@ describe('/rounds', function () {
       xEnd: expect.any(Number),
       yStart: expect.any(Number),
       yEnd: expect.any(Number),
-      roundOver: false,
+      roundStatus: {
+        isRoundOver: expect.any(Boolean),
+        seconds: expect.any(Number),
+      },
     });
   });
   it('PATCH /rounds 3 successful hit should return roundOver = true', async () => {
@@ -70,11 +74,14 @@ describe('/rounds', function () {
       .send(`yCoordinate=${characters[2].yStart + 1}`);
 
     expect(firstHit.status).toEqual(201);
-    expect(firstHit.body.roundOver).toBe(false);
+    expect(firstHit.body.roundStatus.isRoundOver).toBe(false);
+    expect(firstHit.body.roundStatus.seconds).toBe(-1);
     expect(secondHit.status).toEqual(201);
-    expect(secondHit.body.roundOver).toBe(false);
+    expect(secondHit.body.roundStatus.isRoundOver).toBe(false);
+    expect(secondHit.body.roundStatus.seconds).toBe(-1);
     expect(thirdHit.status).toEqual(201);
-    expect(thirdHit.body.roundOver).toBe(true);
+    expect(thirdHit.body.roundStatus.isRoundOver).toBe(true);
+    expect(thirdHit.body.roundStatus.seconds).toBeGreaterThan(0);
   });
   it('PATCH /rounds providing wrong input returns error', async () => {
     const noCharId = await request(app)
@@ -134,7 +141,8 @@ describe('/rounds', function () {
       .send(`yCoordinate=${characters[0].yStart + 1}`);
 
     expect(firstHit.status).toEqual(201);
-    expect(firstHit.body.roundOver).toBe(false);
+    expect(firstHit.body.roundStatus.isRoundOver).toBe(false);
+    expect(firstHit.body.roundStatus.seconds).toBe(-1);
     expect(secondHit.status).toEqual(409);
   });
 });

@@ -53,11 +53,11 @@ model Round {
 }
 
 model Leaderboard {
-    id         Int     @id @default(autoincrement())
+    id         Int    @id @default(autoincrement())
     seconds    Int
-    playerName String?
-    Round      Round   @relation(fields: [roundId], references: [id], onDelete: Cascade)
-    roundId    String  @unique
+    playerName String @default("Guest player")
+    Round      Round  @relation(fields: [roundId], references: [id], onDelete: Cascade)
+    roundId    String @unique
 
     @@map("leaderboard")
 }

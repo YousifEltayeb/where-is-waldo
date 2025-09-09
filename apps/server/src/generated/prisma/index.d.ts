@@ -4773,7 +4773,7 @@ export namespace Prisma {
   export type LeaderboardGroupByOutputType = {
     id: number
     seconds: number
-    playerName: string | null
+    playerName: string
     roundId: string
     _count: LeaderboardCountAggregateOutputType | null
     _avg: LeaderboardAvgAggregateOutputType | null
@@ -4846,7 +4846,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       seconds: number
-      playerName: string | null
+      playerName: string
       roundId: string
     }, ExtArgs["result"]["leaderboard"]>
     composites: {}
@@ -6050,7 +6050,7 @@ export namespace Prisma {
     NOT?: LeaderboardWhereInput | LeaderboardWhereInput[]
     id?: IntFilter<"Leaderboard"> | number
     seconds?: IntFilter<"Leaderboard"> | number
-    playerName?: StringNullableFilter<"Leaderboard"> | string | null
+    playerName?: StringFilter<"Leaderboard"> | string
     roundId?: StringFilter<"Leaderboard"> | string
     Round?: XOR<RoundScalarRelationFilter, RoundWhereInput>
   }
@@ -6058,7 +6058,7 @@ export namespace Prisma {
   export type LeaderboardOrderByWithRelationInput = {
     id?: SortOrder
     seconds?: SortOrder
-    playerName?: SortOrderInput | SortOrder
+    playerName?: SortOrder
     roundId?: SortOrder
     Round?: RoundOrderByWithRelationInput
   }
@@ -6070,14 +6070,14 @@ export namespace Prisma {
     OR?: LeaderboardWhereInput[]
     NOT?: LeaderboardWhereInput | LeaderboardWhereInput[]
     seconds?: IntFilter<"Leaderboard"> | number
-    playerName?: StringNullableFilter<"Leaderboard"> | string | null
+    playerName?: StringFilter<"Leaderboard"> | string
     Round?: XOR<RoundScalarRelationFilter, RoundWhereInput>
   }, "id" | "roundId">
 
   export type LeaderboardOrderByWithAggregationInput = {
     id?: SortOrder
     seconds?: SortOrder
-    playerName?: SortOrderInput | SortOrder
+    playerName?: SortOrder
     roundId?: SortOrder
     _count?: LeaderboardCountOrderByAggregateInput
     _avg?: LeaderboardAvgOrderByAggregateInput
@@ -6092,7 +6092,7 @@ export namespace Prisma {
     NOT?: LeaderboardScalarWhereWithAggregatesInput | LeaderboardScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Leaderboard"> | number
     seconds?: IntWithAggregatesFilter<"Leaderboard"> | number
-    playerName?: StringNullableWithAggregatesFilter<"Leaderboard"> | string | null
+    playerName?: StringWithAggregatesFilter<"Leaderboard"> | string
     roundId?: StringWithAggregatesFilter<"Leaderboard"> | string
   }
 
@@ -6291,46 +6291,46 @@ export namespace Prisma {
 
   export type LeaderboardCreateInput = {
     seconds: number
-    playerName?: string | null
+    playerName?: string
     Round: RoundCreateNestedOneWithoutLeaderboardInput
   }
 
   export type LeaderboardUncheckedCreateInput = {
     id?: number
     seconds: number
-    playerName?: string | null
+    playerName?: string
     roundId: string
   }
 
   export type LeaderboardUpdateInput = {
     seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerName?: StringFieldUpdateOperationsInput | string
     Round?: RoundUpdateOneRequiredWithoutLeaderboardNestedInput
   }
 
   export type LeaderboardUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerName?: StringFieldUpdateOperationsInput | string
     roundId?: StringFieldUpdateOperationsInput | string
   }
 
   export type LeaderboardCreateManyInput = {
     id?: number
     seconds: number
-    playerName?: string | null
+    playerName?: string
     roundId: string
   }
 
   export type LeaderboardUpdateManyMutationInput = {
     seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerName?: StringFieldUpdateOperationsInput | string
   }
 
   export type LeaderboardUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerName?: StringFieldUpdateOperationsInput | string
     roundId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -6653,21 +6653,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type RoundScalarRelationFilter = {
     is?: RoundWhereInput
     isNot?: RoundWhereInput
@@ -6702,24 +6687,6 @@ export namespace Prisma {
   export type LeaderboardSumOrderByAggregateInput = {
     id?: SortOrder
     seconds?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type CharacterCreateNestedManyWithoutGameInput = {
@@ -6915,10 +6882,6 @@ export namespace Prisma {
     connect?: RoundWhereUniqueInput
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
   export type RoundUpdateOneRequiredWithoutLeaderboardNestedInput = {
     create?: XOR<RoundCreateWithoutLeaderboardInput, RoundUncheckedCreateWithoutLeaderboardInput>
     connectOrCreate?: RoundCreateOrConnectWithoutLeaderboardInput
@@ -7099,37 +7062,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type CharacterCreateWithoutGameInput = {
@@ -7318,13 +7250,13 @@ export namespace Prisma {
 
   export type LeaderboardCreateWithoutRoundInput = {
     seconds: number
-    playerName?: string | null
+    playerName?: string
   }
 
   export type LeaderboardUncheckedCreateWithoutRoundInput = {
     id?: number
     seconds: number
-    playerName?: string | null
+    playerName?: string
   }
 
   export type LeaderboardCreateOrConnectWithoutRoundInput = {
@@ -7373,13 +7305,13 @@ export namespace Prisma {
 
   export type LeaderboardUpdateWithoutRoundInput = {
     seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerName?: StringFieldUpdateOperationsInput | string
   }
 
   export type LeaderboardUncheckedUpdateWithoutRoundInput = {
     id?: IntFieldUpdateOperationsInput | number
     seconds?: IntFieldUpdateOperationsInput | number
-    playerName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerName?: StringFieldUpdateOperationsInput | string
   }
 
   export type RoundCreateWithoutLeaderboardInput = {

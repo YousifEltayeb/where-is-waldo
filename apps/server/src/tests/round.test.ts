@@ -4,7 +4,6 @@ import roundsRouter from '../routes/roundsRouter';
 import request from 'supertest';
 import { prisma, Character } from '../config/prismaClient';
 import { createTestApp, API_VERSION } from './setup';
-import { boolean } from 'zod';
 
 const app = createTestApp(roundsRouter);
 

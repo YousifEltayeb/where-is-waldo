@@ -240,7 +240,7 @@ async function seedRoundsAndLeaderboard() {
 
   await prisma.leaderboard.createMany({
     data: [
-      { seconds: 123, playerName: null, roundId: rounds[0].id },
+      { seconds: 123, roundId: rounds[0].id },
       { seconds: 321, playerName: 'Flan Alflany', roundId: rounds[1].id },
     ],
   });

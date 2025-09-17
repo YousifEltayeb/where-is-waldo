@@ -1,6 +1,6 @@
 import express from 'express';
 import { NextFunction, Request, Response } from 'express';
-const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
+const PORT = process.env.PORT ? Number(process.env.PORT) : 8080;
 const API_VERSION = '/api/v1';
 import { Error } from './types.js';
 import cors from 'cors';

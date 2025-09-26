@@ -2,7 +2,7 @@
 
 A full-stack "Where's Waldo?"-style photo tagging game. Find the hidden characters in the images as fast as you can and see how you stack up on the leaderboard!
 
-**Live Link:** [Link to deployed application]() <!-- TODO: Add live link -->
+[Live Link](https://where-is-waldo-2gi.pages.dev/)
 
 ## Gameplay
 

@@ -181,8 +181,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../config",
   "clientVersion": "6.15.0",
@@ -191,6 +190,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -201,7 +201,7 @@ const config = {
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Game {\n  id         Int         @id @default(autoincrement())\n  name       String      @unique\n  link       String      @unique\n  difficulty Difficulty  @default(EASY)\n  Characters Character[]\n  Rounds     Round[]\n  imgWidth   Int\n\n  @@map(\"games\")\n}\n\nmodel Character {\n  id     Int    @id @default(autoincrement())\n  name   String @unique\n  link   String @unique\n  Game   Game?  @relation(fields: [gameId], references: [id], onDelete: Cascade)\n  gameId Int?\n  xStart Int\n  xEnd   Int\n  yStart Int\n  yEnd   Int\n\n  @@map(\"characters\")\n}\n\nmodel Round {\n  id          String       @id @default(uuid())\n  start       DateTime     @default(now())\n  end         DateTime?\n  Game        Game         @relation(fields: [gameId], references: [id], onDelete: Cascade)\n  gameId      Int\n  hits        Int[]\n  Leaderboard Leaderboard?\n\n  @@map(\"rounds\")\n}\n\nmodel Leaderboard {\n  id         Int    @id @default(autoincrement())\n  seconds    Int\n  playerName String @default(\"Guest player\")\n  Round      Round  @relation(fields: [roundId], references: [id], onDelete: Cascade)\n  roundId    String @unique\n\n  @@map(\"leaderboard\")\n}\n\nenum Difficulty {\n  EASY\n  MEDIUM\n  HARD\n}\n",
   "inlineSchemaHash": "441008d482d133a2deae206dec36ce272878f67296e9114a3cf8ea2414717431",
-  "copyEngine": false
+  "copyEngine": true
 }
 config.dirname = '/'
 
